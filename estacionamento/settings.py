@@ -1,15 +1,17 @@
 
 import os
+from decouple import config
+from dj_database_url import parse as dburl
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '@i+m2550%t&lsc#(athf7^#b#fr1x_!5=z_*9npnf@kb1k^%$*'
+SECRET_KEY = config('SECRET_KEY')
 
 
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1',]
+ALLOWED_HOSTS = ['127.0.0.1', 'https://estacionamentonamao.herokuapp.com/']
 
 
 INSTALLED_APPS = [
@@ -52,12 +54,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'estacionamento.wsgi.application'
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+DATABASES = { 
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl), 
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -87,4 +86,4 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
