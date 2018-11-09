@@ -1,14 +1,21 @@
-<h2>UpDating Veiculo: {{ veiculo }}</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
+{% block main %}
+<div class="row">
+    <div class="col">
+        <h2>UpDating Veiculo: {{ veiculo }}</h2>
+        
+        <form action="{%  url 'core_veiculo_update' veiculo.id  %}" method="POST">
+                
+            {% csrf_token %}
+            {{form|bootstrap}}
 
-<form action="{%  url 'core_veiculo_update' veiculo.id  %}" method="POST">
-    
-    {% csrf_token %}
-    {{form.as_p}}
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'core_veiculo_delete' veiculo.id %}"  class="btn btn-danger">Deletar</a>
+        </form>
 
-    <button type="submit">Salvar</button>
+    </div>
+</div>
 
-</form>
-
-
-<a href="{% url 'core_veiculo_delete' veiculo.id %}">Deletar</a>
+{% endblock %}

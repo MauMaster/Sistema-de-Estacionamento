@@ -22,8 +22,8 @@ def home(request):
 
 def lista_pessoas(request):
     pessoas = Pessoa.objects.all()
-    form = PessoaForm
-    data = {'pessoas': pessoas, 'form':form}
+    form = PessoaForm()
+    data = {'pessoas': pessoas, 'form': form}
     return render(request, 'core/lista_pessoas.html', data)
 
 
@@ -34,9 +34,9 @@ def pessoa_novo(request):
     return redirect ('core_lista_pessoas')
 
 def pessoa_update(request, id):
-    data = {}
+    data  = {}
     pessoa = Pessoa.objects.get(id=id)
-    form =PessoaForm(request.POST or  None, instance=pessoa)
+    form = PessoaForm(request.POST or None, instance=pessoa)
     data['pessoa'] = pessoa
     data['form'] = form
 
@@ -72,9 +72,9 @@ def lista_veiculos(request):
 
 
 def veiculo_update(request, id):
-    data = {}
+    data  = {}
     veiculo = Veiculo.objects.get(id=id)
-    form =VeiculoForm(request.POST or  None, instance=veiculo)
+    form = VeiculoForm(request.POST or None, instance=veiculo)
     data['veiculo'] = veiculo
     data['form'] = form
 
@@ -93,6 +93,7 @@ def veiculo_delete(request, id):
         return redirect('core_lista_veiculos')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': veiculo})
+
 
 
 def lista_movrotativos(request):
@@ -183,4 +184,4 @@ def movmensalista_update(request, id):
             return redirect('core_lista_movmensalista')
     else:
         return render(request, 'core/update_movmensalista.html', data)
-
+        
