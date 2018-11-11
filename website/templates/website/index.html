@@ -1,5 +1,68 @@
 {% extends 'website/base.html' %}
+{% load static %}
 
 {% block main %}
-    <h1>Seja bem vindo ao web site</h1>
+    <div class="row row-space">
+        <div class="col6">
+            <h1>Estacionamento 24 horas</h1>
+            <span>Slogan da sua empresa aqui</span>
+        </div>
+        <div class="col6">
+            <img src="{% static 'img/car.jpg' %}" alt="Estacionamento 24 horas">
+        </div>
+    </div>
+
+    {% include 'website/menu.html' %}
+
+    <div class="row row-space">
+        <div class="col-6">
+                Mussum Ipsum, cacilds vidis litro abertis. Delegadis gente finis, bibendum egestas 
+                augue arcu ut est. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, 
+                aguis e fermentis. Quem num gosta di mim que vai caçá sua turmis! Interagi no mé, 
+                cursus quis, vehicula ac nisi.
+        </div>
+    
+        <div class="col-6">
+                Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget. 
+                Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Casamentiss faiz malandris 
+                se pirulitá. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. 
+                Aenean sit amet nisi. 
+        </div>
+    </div>
+
+    <div class="row row-space">
+        <div class="col-4">
+                Mussum Ipsum, cacilds vidis litro abertis. Delegadis gente finis, bibendum egestas 
+                augue arcu ut est. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, 
+                aguis e fermentis. Quem num gosta di mim que vai caçá sua turmis! Interagi no mé, 
+                cursus quis, vehicula ac nisi.
+        </div>
+
+        <div class="col-4">
+                <img src="{% static 'img/24.jpg' %}" alt="Estacionamento 24 horas">
+        </div>
+
+        <div class="col-4">
+                Mussum Ipsum, cacilds vidis litro abertis. Delegadis gente finis, bibendum egestas 
+                augue arcu ut est. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, 
+                aguis e fermentis. Quem num gosta di mim que vai caçá sua turmis! Interagi no mé, 
+                cursus quis, vehicula ac nisi.
+        </div>
+    </div>
+    <div class="row row-space">
+            <div class="col-6">
+                    Mussum Ipsum, cacilds vidis litro abertis. Delegadis gente finis, bibendum egestas 
+                    augue arcu ut est. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, 
+                    aguis e fermentis. Quem num gosta di mim que vai caçá sua turmis! Interagi no mé, 
+                    cursus quis, vehicula ac nisi.
+            </div>
+        
+            <div class="col-6">
+                    Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget. 
+                    Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Casamentiss faiz malandris 
+                    se pirulitá. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. 
+                    Aenean sit amet nisi. 
+            </div>
+        </div>
+        {% include 'website/footer.html' %}
 {% endblock %}
