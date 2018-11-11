@@ -5,11 +5,12 @@
 
 <div class="row">
     <div class="col-12">
-        <h1>Lista Movimentos Rotativos</h2>
+        
     </div>
 </div>
 <div class="row">
     <div class="col-sm-6">
+            <h2>Cadastro</h2>
         <form action="{%  url 'core_movrotativos_novo'  %}" method="POST">
 
             {% csrf_token %}
@@ -19,17 +20,35 @@
 
         </form>
     </div>
-    <div>
-        <ul>
-            {% for mov in mov_rot %}
-            <li>
-                <a href="{%  url 'core_movrotativos_update' mov.id  %}">
-                    {{mov.checkin}} - {{mov.veiculo.placa}}
-                </a>
-            </li>
-
-            {% endfor %}
-        </ul>
+    <div class="col-sm-6">
+            <h2>Lista Movimentos Rotativos</h2>
+            <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Checkin</th>
+                        <th scope="col">Checkout</th>
+                        <th scope="col">Valor-Hora</th>
+                        <th scope="col">Veículo</th>
+                        <th scope="col">Pago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mov in mov_rot %}
+                        <tr>
+                        <th scope="row" >{{mov.id}}</th>
+                        <td > <a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.checkin}} </a></td>
+                        <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.checkout}}</a></td>
+                        <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.valor_hora}}</a></td>
+                        <td > <a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.veiculo}} </a></td>
+                        <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.pago}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                                 
+            </table>
+        
     </div>
 
 </div>

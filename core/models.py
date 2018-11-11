@@ -20,13 +20,14 @@ class Marca(models.Model):
 
 class Veiculo(models.Model):  
     marca = models.ForeignKey(Marca, on_delete=models.PROTECT)
+    modelo = models.CharField(max_length=20)
     placa = models.CharField(max_length=7)
     proprietario = models.ForeignKey(Pessoa, on_delete=models.PROTECT)
     cor = models.CharField(max_length=15)
     observacoes = models.TextField()
     
     def __str__(self):
-        return self.marca.nome + ' - ' + self.placa 
+        return  self.modelo + ' - ' + self.placa
 
 class Parametros(models.Model):
     valor_hora = models.DecimalField(max_digits=5, decimal_places=2)
@@ -41,7 +42,7 @@ class MovRotativo(models.Model):
     checkin = models.DateTimeField(auto_now=False)
     checkout = models.DateTimeField(auto_now=False, null=True, blank=True)
     valor_hora = models.DecimalField(max_digits=5, decimal_places=2)
-    veiculo = models.ForeignKey(Veiculo, on_delete=models.PROTECT)
+    veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     pago = models.BooleanField(default=False)
 
     def horas_total(self):
@@ -51,20 +52,21 @@ class MovRotativo(models.Model):
         return self.valor_hora * self.horas_total()
 
     def __str__(self):
-        return self.veiculo.placa 
+        return self.veiculo.placa
 
 
 class Mensalista(models.Model):
-    veiculo = models.ForeignKey(Veiculo, on_delete=models.PROTECT)
+    veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     inicio = models.DateField()
+    proprietario = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     valor_mes = models.DecimalField(max_digits=6, decimal_places=2)
-
+    
     def __str__(self):
         return str(self.veiculo) + ' - ' + str(self.inicio)
 
 
 class MovMensalista(models.Model):
-    mensalista = models.ForeignKey(Mensalista, on_delete=models.PROTECT)
+    mensalista = models.ForeignKey(Mensalista, on_delete=models.CASCADE)
     dt_pgto = models.DateField()
     total = models.DecimalField(max_digits=6, decimal_places=2)
 
