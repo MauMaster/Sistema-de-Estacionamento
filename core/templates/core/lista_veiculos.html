@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-sm-6">
-            <h2>Cadastro</h2>
+        <h2>Cadastro</h2>
         <form action="{%  url 'core_veiculo_novo'  %}" method="POST">
 
             {% csrf_token %}
@@ -17,30 +17,31 @@
         </form>
     </div>
     <div class="col-sm-6">
-            <h2>Lista Veículos</h2>
-            <table class="table table-striped">
-                    <thead class="thead-dark">
-                       <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Modelo</th>
-                        <th scope="col">Placa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for veiculo in veiculos %}
-                       <tr>
-                        <th scope="row" >{{veiculo.id}}</th>
-                        <td > <a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.marca}} </a></td>
-                        <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.modelo}}</a></td>
-                        <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.placa}}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                  </table>
-                                 
-            </table>
-        
+        <h2>Lista Veículos</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Placa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for veiculo in veiculos %}
+                <tr>
+                    <th scope="row">{{veiculo.id}}</th>
+                    <td> <a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.marca}}
+                        </a></td>
+                    <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.modelo}}</a></td>
+                    <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.placa}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+
+        </table>
+
     </div>
 </div>
 {% endblock %}

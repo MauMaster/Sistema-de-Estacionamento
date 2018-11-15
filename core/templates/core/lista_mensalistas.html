@@ -13,11 +13,12 @@
 
         </form>
     </div>
+
     <div class="col-sm-6">
             <h2>Lista Mensalistas</h2>
             <table class="table table-striped">
                     <thead class="thead-dark">
-                       <tr>
+                        <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Veículo</th>
                         <th scope="col">Início</th>
@@ -27,9 +28,9 @@
                     </thead>
                     <tbody>
                         {% for mensalista in mensalistas %}
-                       <tr>
+                        <tr>
                         <th scope="row" >{{mensalista.id}}</th>
-                        <td > <a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.veiculo}} </a></td>
+                        <td><a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.veiculo}} </a></td>
                         <td><a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.inicio}}</a></td>
                         <td><a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.proprietario}}</a></td>
                         <td><a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.valor_mes}}</a></td>

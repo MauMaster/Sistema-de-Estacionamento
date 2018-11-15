@@ -8,7 +8,7 @@ class Pessoa(models.Model):
     telefone = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nome    
+        return self.nome
 
 
 class Marca(models.Model):
@@ -18,21 +18,21 @@ class Marca(models.Model):
         return self.nome
 
 
-class Veiculo(models.Model):  
-    marca = models.ForeignKey(Marca, on_delete=models.PROTECT)
+class Veiculo(models.Model):
+    marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     modelo = models.CharField(max_length=20)
     placa = models.CharField(max_length=7)
-    proprietario = models.ForeignKey(Pessoa, on_delete=models.PROTECT)
+    proprietario = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     cor = models.CharField(max_length=15)
     observacoes = models.TextField()
-    
+        
     def __str__(self):
-        return  self.modelo + ' - ' + self.placa
+        return self.modelo + ' - ' + self.placa
+
 
 class Parametros(models.Model):
     valor_hora = models.DecimalField(max_digits=5, decimal_places=2)
     valor_mes = models.DecimalField(max_digits=6, decimal_places=2)
-
 
     def __str__(self):
         return 'Parametros Gerais'
@@ -69,7 +69,6 @@ class MovMensalista(models.Model):
     mensalista = models.ForeignKey(Mensalista, on_delete=models.CASCADE)
     dt_pgto = models.DateField()
     total = models.DecimalField(max_digits=6, decimal_places=2)
-
 
     def __str__(self):
         return str(self.mensalista) + ' - ' + str(self.total)
