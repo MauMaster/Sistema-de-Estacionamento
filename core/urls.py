@@ -24,7 +24,7 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^', home, name='core_home'),
+    url(r'^home/$', home, name='core_home'),
     url(r'^pessoas/$', lista_pessoas, name='core_lista_pessoas'),
     url(r'^pessoa-novo/$', pessoa_novo, name='core_pessoa_novo'),
     url(r'^pessoa-update/(?P<id>\d)+/$',

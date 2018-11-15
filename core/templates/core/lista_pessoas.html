@@ -3,46 +3,43 @@
 
 {% block main %}
 
-<div class="row">
-    <div class="col-sm-6">
-            <h2>Cadastro</h2>
-        <form action="{%  url 'core_pessoa_novo'  %}" method="POST">
+<    <div class="row">
+        <div class="col-sm-6">
+                <h2>Cadastro</h2>
+            <form action="{%  url 'core_pessoa_novo'  %}" method="POST">
 
-            {% csrf_token %}
-            {{form|bootstrap}}
+                {% csrf_token %}
+                {{form|bootstrap}}
 
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
 
-        </form>
-    </div>
-
-    <div class="col-sm-6">
-        <h2>Lista Pessoas</h2>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">Telefone</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for pessoa in pessoas %}
-                <tr>
-                <th scope="row">{{pessoa.id}}</th>
-                <td> <a href="{%  url 'core_pessoa_update' pessoa.id  %}" style="color:black">{{pessoa.nome}} </a></td>
-                <td><a href="{%  url 'core_pessoa_update' pessoa.id  %}" style="color:black">{{pessoa.endereco}}</a></td>
-                <td><a href="{%  url 'core_pessoa_update' pessoa.id  %}" style="color:black"></a>{{pessoa.telefone}}</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+            </form>
+        </div>
         
-
-
-
+        <div class="col-sm-6">
+                <h2>Lista Pessoas</h2>
+                <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">Telefone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pessoa in pessoas %}
+                        <tr>
+                            <th scope="row" >{{pessoa.id}}</th>
+                            <td > <a href="{%  url 'core_pessoa_update' pessoa.id  %}" style="color:black">{{pessoa.nome}} </a></td>
+                            <td><a href="{%  url 'core_pessoa_update' pessoa.id  %}" style="color:black">{{pessoa.endereco}}</a></td>
+                            <td><a href="{%  url 'core_pessoa_update' pessoa.id  %}" style="color:black">{{pessoa.telefone}}</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                </table>
+                                    
+                           
+        </div>
     </div>
-</div>
 {% endblock %}

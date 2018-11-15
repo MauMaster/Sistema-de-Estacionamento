@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'bootstrapform',
     'core',
     'website',
-       
 ]
 
 MIDDLEWARE = [
@@ -42,7 +41,7 @@ ROOT_URLCONF = 'estacionamento.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',],
+        'DIRS': ['templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -58,8 +57,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'estacionamento.wsgi.application'
 
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-DATABASES = { 
-    'default': config('DATABASE_URL', default=default_dburl, cast=dburl), 
+DATABASES = {
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -89,13 +88,13 @@ USE_L10N = True
 USE_TZ = True
 
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-    
+    os.path.join(BASE_DIR, "static"),
+
 )
 
 LOGIN_URL = 'login'
