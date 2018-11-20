@@ -1,22 +1,27 @@
 {%extends 'base.html' %}
 {% load bootstrap %}
 
+
 {% block main %}
 
-<    <div class="row">
-        <div class="col-sm-6">
+
+    <div class="row">
+        <div class="col-sm-4">
                 <h2>Cadastro</h2>
-            <form action="{%  url 'core_pessoa_novo'  %}" method="POST">
+               
+            
+            <form action="{%  url 'core_pessoa_novo'  %}" method="POST"  >
 
                 {% csrf_token %}
-                {{form|bootstrap}}
+                 {{form|bootstrap}}
 
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary" value="cadastrar">Cadastrar</button>
+               
 
             </form>
         </div>
         
-        <div class="col-sm-6">
+        <div class="col-sm-8">
                 <h2>Lista Pessoas</h2>
                 <table class="table table-striped">
                         <thead class="thead-dark">
@@ -25,6 +30,8 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Endereço</th>
                             <th scope="col">Telefone</th>
+                            
+                            
                             </tr>
                         </thead>
                         <tbody>

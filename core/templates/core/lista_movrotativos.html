@@ -31,6 +31,9 @@
                         <th scope="col">Valor-Hora</th>
                         <th scope="col">Veículo</th>
                         <th scope="col">Pago</th>
+                        <th scope="col">Horas</th>
+                        <th scope="col">Valor</th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +45,9 @@
                         <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.valor_hora}}</a></td>
                         <td > <a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.veiculo}} </a></td>
                         <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.pago}}</a></td>
+                        <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.horas_total}}</a></td>
+                        <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.total}}</a></td>
+                       
                         </tr>
                         {% endfor %}
                     </tbody>

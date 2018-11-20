@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import (
-    Pessoa, 
+    Pessoa,
     Veiculo,
     MovRotativo,
     Mensalista,
@@ -16,6 +16,7 @@ from .forms import (
     MovMensalistaForm
 
 )
+
 
 
 @login_required
@@ -38,7 +39,6 @@ def pessoa_novo(request):
     if form.is_valid():
         form.save()
     return redirect('core_lista_pessoas')
-
 
 @login_required
 def pessoa_update(request, id):
