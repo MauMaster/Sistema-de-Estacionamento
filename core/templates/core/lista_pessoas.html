@@ -10,7 +10,7 @@
                 <h2>Cadastro</h2>
                
             
-            <form action="{%  url 'core_pessoa_novo'  %}" method="POST"  >
+            <form action="{%  url 'core_pessoa_novo'  %}" method="POST" novalidate >
 
                 {% csrf_token %}
                  {{form|bootstrap}}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from .models import (
     Pessoa,
     Veiculo,
@@ -10,13 +11,12 @@ from .models import (
 
 from .forms import (
     PessoaForm,
-    VeiculoForm, 
-    MovRotativoForm, 
+    VeiculoForm,
+    MovRotativoForm,
     MensalistaForm,
     MovMensalistaForm
 
 )
-
 
 
 @login_required
@@ -33,12 +33,19 @@ def lista_pessoas(request):
     return render(request, 'core/lista_pessoas.html', data)
 
 
+
 @login_required
 def pessoa_novo(request):
-    form = PessoaForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-    return redirect('core_lista_pessoas')
+    if request.method == 'POST':
+            form = PessoaForm(request.POST or None)
+            if form.is_valid():
+                form.save()
+                return redirect('core_lista_pessoas')
+    else:
+        form = PessoaForm
+    return render(request, 'core/lista_pessoas.html', {'form': form})
+
+
 
 @login_required
 def pessoa_update(request, id):
@@ -68,17 +75,21 @@ def pessoa_delete(request, id):
 
 @login_required
 def veiculo_novo(request):
-    form = VeiculoForm(request.POST or  None)
-    if form.is_valid():
-        form.save()
-    return redirect('core_lista_veiculos')
-
+    if request.method == 'POST':
+        form = VeiculoForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_veiculos')
+    else:
+        form = VeiculoForm
+    return render(request, 'core/lista_veiculos.html', {'form': form})
+    
 
 @login_required
 def lista_veiculos(request):
     form = VeiculoForm()
     veiculos = Veiculo.objects.all()
-    data = {'veiculos': veiculos, 'form':form}
+    data = {'veiculos': veiculos, 'form': form}
     return render(request, 'core/lista_veiculos.html', data)
 
 
@@ -112,7 +123,7 @@ def veiculo_delete(request, id):
 def lista_movrotativos(request):
     mov_rot = MovRotativo.objects.all()
     form = MovRotativoForm()
-    data = {'form': form, "mov_rot": mov_rot} 
+    data = {'form': form, "mov_rot": mov_rot}
     return render(
         request, 'core/lista_movrotativos.html', data)
 
@@ -129,7 +140,7 @@ def movrotativos_novo(request):
 def movrotativos_update(request, id):
     data = {}
     mov_rotativo = MovRotativo.objects.get(id=id)
-    form = MovRotativoForm(request.POST or  None, instance=mov_rotativo)
+    form = MovRotativoForm(request.POST or None, instance=mov_rotativo)
     data['mov_rotativo'] = mov_rotativo
     data['form'] = form
 
@@ -148,8 +159,8 @@ def movrotativos_delete(request, id):
         mov_rotativo.delete()
         return redirect('core_lista_movrotativos')
     else:
-        return render(request, 'core/delete_confirm.html', 
-        {'obj': mov_rotativo})
+        return render(request, 'core/delete_confirm.html',
+                      {'obj': mov_rotativo})
 
 
 @login_required
@@ -163,17 +174,21 @@ def lista_mensalista(request):
 
 @login_required
 def mensalista_novo(request):
-    form = MensalistaForm(request.POST or  None)
-    if form.is_valid():
-        form.save()
-    return redirect('core_lista_mensalista')
+    if request.method == 'POST':
+        form = MensalistaForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_mensalista')
+    else:
+        form = MensalistaForm
+    return render(request, 'core/lista_mensalistas.html', {'form': form})
 
 
 @login_required
 def mensalista_update(request, id):
     data = {}
     mensalista = Mensalista.objects.get(id=id)
-    form = MensalistaForm(request.POST or  None, instance=mensalista)
+    form = MensalistaForm(request.POST or None, instance=mensalista)
     data['mensalista'] = mensalista
     data['form'] = form
 
@@ -183,7 +198,6 @@ def mensalista_update(request, id):
             return redirect('core_lista_mensalista')
     else:
         return render(request, 'core/update_mensalista.html', data)
-
 
 
 @login_required
@@ -207,7 +221,7 @@ def lista_movmensalista(request):
 
 @login_required
 def movmensalista_novo(request):
-    form = MovMensalistaForm(request.POST or  None)
+    form = MovMensalistaForm(request.POST or None)
     if form.is_valid():
         form.save()
     return redirect('core_lista_movmensalista')
@@ -217,7 +231,7 @@ def movmensalista_novo(request):
 def movmensalista_update(request, id):
     data = {}
     mov_mensalista = MovMensalista.objects.get(id=id)
-    form = MovMensalistaForm(request.POST or  None, instance=mov_mensalista)
+    form = MovMensalistaForm(request.POST or None, instance=mov_mensalista)
     data['mov_mensalista'] = mov_mensalista
     data['form'] = form
 
@@ -237,4 +251,3 @@ def movmensalista_delete(request, id):
         return redirect('core_lista_movmensalista')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': mov_mensalista})
-        

@@ -3,9 +3,9 @@ import math
 
 
 class Pessoa(models.Model):
-    nome = models.CharField(max_length=25, blank=False)
+    nome = models.CharField(max_length=50, blank=False)
     email = models.EmailField(blank=False)
-    cpf = models.CharField(max_length=20, unique=True, blank=False)
+    cpf = models.CharField(max_length=11, unique=True, blank=False)
     endereco = models.CharField(max_length=50)
     numero = models.CharField(max_length=10)
     bairro = models.CharField(max_length=30)
@@ -16,6 +16,8 @@ class Pessoa(models.Model):
     
     def __str__(self):
         return self.nome
+
+      
 
 
 class Marca(models.Model):
@@ -47,10 +49,10 @@ class Parametros(models.Model):
 
 
 class MovRotativo(models.Model):
-    checkin = models.DateTimeField(auto_now=True)
+    checkin = models.DateTimeField(auto_now=False, null=False, blank=False)
     checkout = models.DateTimeField(auto_now=False, null=True, blank=True)
-    valor_hora = models.DecimalField(max_digits=5, decimal_places=2, blank=False)
-    veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE, blank=False)
+    valor_hora = models.DecimalField(max_digits=5, decimal_places=2)
+    veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     pago = models.BooleanField(default=False)
 
     def horas_total(self):
