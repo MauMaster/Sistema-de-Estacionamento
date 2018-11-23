@@ -45,6 +45,10 @@ class MensalistaForm(ModelForm):
     class Meta:
         model = Mensalista
         fields = '__all__'
+        widgets = {
+            'inicio': forms.DateInput(attrs={'class':'datepicker'}),
+        }
+       
 
     def clean(self):
         cleaned_data = super(MensalistaForm, self).clean()

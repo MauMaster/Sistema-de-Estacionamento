@@ -56,7 +56,8 @@ class MovRotativo(models.Model):
     pago = models.BooleanField(default=False)
 
     def horas_total(self):
-        return math.ceil((self.checkout - self.checkin).total_seconds() / 3600)
+        
+            return math.ceil((self.checkout - self.checkin).total_seconds() / 3600)
 
     def total(self):
         return self.valor_hora * self.horas_total()

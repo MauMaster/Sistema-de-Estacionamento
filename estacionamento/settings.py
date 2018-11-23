@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'core',
     'website',
     'widget_tweaks',
+    'bootstrap_datepicker_plus',
     
 ]
 
