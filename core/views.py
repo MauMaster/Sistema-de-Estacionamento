@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from .models import (
     Pessoa,
     Veiculo,
@@ -18,6 +20,13 @@ from .forms import (
 
 )
 
+@receiver(post_save, sender=MovRotativo)
+def before_movrotativo_save(sender, **kwargs):
+    print(kwargs)
+    instance = kwargs['instance']
+    if instance.pago == 'Sim':
+        print('Send email')
+        instance.send_email()
 
 @login_required
 def home(request):
@@ -130,10 +139,14 @@ def lista_movrotativos(request):
 
 @login_required
 def movrotativos_novo(request):
-    form = MovRotativoForm(request.POST or  None)
-    if form.is_valid():
-        form.save()
-    return redirect('core_lista_movrotativos')
+    if request.method == 'POST':
+        form = MovRotativoForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_movrotativos')
+    else:
+        form = MensalistaForm
+    return render(request, 'core/lista_movrotativos.html', {'form': form})
 
 
 @login_required

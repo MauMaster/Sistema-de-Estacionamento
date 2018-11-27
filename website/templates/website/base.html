@@ -5,24 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.css' %}">
-    <script src="{% static '/bootstrap/js/bootstrap.js' %}"></script>
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
-    
+   <link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/bootstrap/css/carousel.css" rel="stylesheet">
     <title>Website - Estacionamento</title>
 </head>
 <body>
 
-        <div class="container">
-            <div class="row row-space">
-                 <div class="col6">
-                    <h1>Estacionamento 24 horas</h1>
-                    <span>Slogan da sua empresa aqui</span>
-                 </div>
-                 <div class="col6">
-                        <img src="{% static 'img/car.jpg' %}" alt="Estacionamento 24 horas">
-                 </div>
-        </div>
         {% include 'website/menu.html' %}
         {% block main %}
         {% endblock %}
@@ -31,5 +21,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="{% static '/bootstrap/js/bootstrap.js' %}"></script>
+    {% include 'website/footer.html' %}
 </body>
 </html>

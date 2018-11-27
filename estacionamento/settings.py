@@ -26,6 +26,10 @@ INSTALLED_APPS = [
     'website',
     'widget_tweaks',
     'bootstrap_datepicker_plus',
+    'bootstrap_datepicker',
+    
+    
+    
     
 ]
 
@@ -103,3 +107,10 @@ STATICFILES_DIRS = (
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'core_home'
 LOGOUT_REDIRECT_URL = 'core_home'
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'estacioneaqui24@gmail.com'
+EMAIL_HOST_PASSWORD = '10038561003856'
+EMAIL_PORT = 587

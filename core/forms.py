@@ -9,6 +9,14 @@ from .models import (
 )
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
+class DateTimeInput(forms.DateTimeInput):
+    input_type = 'datetime'
+
+
 class PessoaForm(forms.ModelForm):
     class Meta:
         model = Pessoa
@@ -35,20 +43,32 @@ class VeiculoForm(forms.ModelForm):
             raise forms.ValidationError('Campos obriatorios')
 
 
-class MovRotativoForm(ModelForm):
+class MovRotativoForm(forms.ModelForm):
     class Meta:
         model = MovRotativo
         fields = '__all__'
+        widgets = {
+            'checkin':  DateTimeInput(),
+            'checkout': DateTimeInput(),
+        }
 
+    def clean(self):
+        cleaned_data = super(MovRotativoForm, self).clean()
+        checkin = cleaned_data.get('checkin')
+        valor_hora = cleaned_data.get('valor_hora')
+        if not checkin and not valor_hora:
+            raise forms.ValidationError('Campos obriatorios')
 
-class MensalistaForm(ModelForm):
+   
+
+class MensalistaForm(forms.ModelForm):
     class Meta:
         model = Mensalista
         fields = '__all__'
         widgets = {
-            'inicio': forms.DateInput(attrs={'class':'datepicker'}),
+            'inicio': DateInput(),
+            'validade': DateInput()
         }
-       
 
     def clean(self):
         cleaned_data = super(MensalistaForm, self).clean()
