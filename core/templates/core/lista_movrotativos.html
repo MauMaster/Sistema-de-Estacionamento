@@ -4,14 +4,16 @@
 
 {% block main %}
 
+
+   
 <div class="row">
     <div class="col-12">
         
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-6">
-            <h2>Cadastro</h2>
+    <div class="col-sm-3">
+            <h2>Cadastro de Rotativos</h2>
         <form action="{%  url 'core_movrotativos_novo'  %}" method="POST" novalidate>
           {% csrf_token %}
 
@@ -56,16 +58,16 @@
 
         </form>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-9">
             <h2>Lista Movimentos Rotativos</h2>
-            <table class="table table-striped">
+            <table  class="table table-bordered sortable" >
                     <thead class="thead-dark">
                         <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Checkin</th>
                         <th scope="col">Checkout</th>
                         <th scope="col">Valor-Hora</th>
-                        <th scope="col">Veículo</th>
+                        <th scope="col">Placa</th>
                         <th scope="col">Pago</th>
                         <th scope="col">Horas</th>
                         <th scope="col">Valor</th>
@@ -79,7 +81,7 @@
                         <td > <a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.checkin}} </a></td>
                         <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.checkout}}</a></td>
                         <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.valor_hora}}</a></td>
-                        <td > <a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.veiculo}} </a></td>
+                        <td > <a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.placa}} </a></td>
                         <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.pago}}</a></td>
                         <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.horas_total}}</a></td>
                         <td><a href="{%  url 'core_movrotativos_update' mov.id  %}" style="color:black">{{mov.total}}</a></td>
@@ -87,7 +89,7 @@
                         </tr>
                         {% endfor %}
                     </tbody>
-                  </table>
+                  
                                  
             </table>
         
@@ -95,3 +97,4 @@
 
 </div>
 {% endblock %}
+

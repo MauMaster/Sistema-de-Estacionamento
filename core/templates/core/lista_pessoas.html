@@ -1,20 +1,14 @@
 {%extends 'base.html' %}
 {% load bootstrap %}
 {% load widget_tweaks %}
-<script> (function () { 
-$ (document) .ready (function () { 
-$ ("# id_datetime"). datetimepicker (); 
-}); 
-}) (jQuery); 
-</ script> 
 
 
 {% block main %}
 
 
     <div class="row">
-        <div class="col-sm-4">
-                <h2>Cadastro</h2>
+        <div class="col-sm-3">
+                <h2>Cadastro de Mensalistas</h2>
                
             
             <form action="{%  url 'core_pessoa_novo'  %}" method="POST" novalidate >
@@ -64,7 +58,7 @@ $ ("# id_datetime"). datetimepicker ();
             </form>
         </div>
         
-        <div class="col-sm-8">
+        <div class="col-sm-9">
                 <h2>Lista Pessoas</h2>
                 <table class="table table-striped">
                         <thead class="thead-dark">

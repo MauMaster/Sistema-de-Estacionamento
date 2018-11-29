@@ -20,6 +20,12 @@ from .forms import (
 
 )
 
+
+@login_required
+def dashboard(request):
+    return render(request, 'core/dashboard.html')
+
+
 @receiver(post_save, sender=MovRotativo)
 def before_movrotativo_save(sender, **kwargs):
     print(kwargs)

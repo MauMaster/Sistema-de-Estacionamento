@@ -1,8 +1,7 @@
 from django.db import models
 from django.core.mail import send_mail
 import math
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 STATE_CHOICES = (
     ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
@@ -51,7 +50,7 @@ class Veiculo(models.Model):
     ano = models.CharField(max_length=7)
     placa = models.CharField(max_length=7)
     proprietario = models.ForeignKey(
-        Pessoa, on_delete=models.CASCADE, blank=False)
+        Pessoa, on_delete=models.CASCADE, blank=False, )
     cor = models.CharField(max_length=15, blank=False)
     observacoes = models.TextField(blank=False)
 
@@ -70,11 +69,11 @@ class Parametros(models.Model):
 class MovRotativo(models.Model):
     checkin = models.DateTimeField(auto_now=False, blank=False, null=False,)
     checkout = models.DateTimeField(auto_now=False, null=True, blank=True)
-    email = models.ForeignKey(Pessoa, on_delete=models.CASCADE, blank=False)
+    email = models.EmailField(blank=False)
+    placa = models.CharField(max_length=7, blank=False)
+    modelo = models.CharField(max_length=15, blank=False)
     valor_hora = models.DecimalField(
         max_digits=5, decimal_places=2, null=False, blank=False)
-    veiculo = models.ForeignKey(
-        Veiculo, on_delete=models.CASCADE, null=False, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
 
     def horas_total(self):
@@ -86,15 +85,12 @@ class MovRotativo(models.Model):
     def total(self):
         return self.valor_hora * self.horas_total()
 
-    def __str__(self):
-        return self.veiculo.placa
-
     def send_email(self):
         if self.pago == 'Sim':
-            assunto = 'Comprovante pagamento Estacione Aqui 24 Horas'
-            mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas.'
-            recipient_list = [self.email.email]
-            
+            assunto =  'Comprovante pagamento Estacione Aqui 24 Horas'
+            mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Seu horário de Chekin foi:  ' + str(self.checkin) + 'Seu horário de Chekou foi:   ' + str(self.checkout) + '  Confirmamos o pagamento do valor de: ' + str(self.total) + '   E aguardamos seu retorno '
+            recipient_list = [self.email]
+
             send_mail(
                 assunto,
                 mensagem,
@@ -113,6 +109,8 @@ class Mensalista(models.Model):
     valor_mes = models.DecimalField(
         max_digits=6, decimal_places=2, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
+
+    
 
     def mensal(self):
         return math.ceil((self.validade - self.inicio).total_seconds() / 86400)

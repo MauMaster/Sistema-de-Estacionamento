@@ -20,11 +20,17 @@ from .views import (
     veiculo_delete,
     movrotativos_delete,
     mensalista_delete,
-    movmensalista_delete
+    movmensalista_delete,
+    dashboard
 )
 
 urlpatterns = [
     url(r'^home/$', home, name='core_home'),
+
+    
+    url(r'^dashboard/$', dashboard, name='core_dashboard'),
+
+
     url(r'^pessoas/$', lista_pessoas, name='core_lista_pessoas'),
     url(r'^pessoa-novo/$', pessoa_novo, name='core_pessoa_novo'),
     url(r'^pessoa-update/(?P<id>\d)+/$',
@@ -64,4 +70,5 @@ urlpatterns = [
         name='core_movmensalista_update'),
     url(r'^mov-mensal-delete/(?P<id>\d+)/$', movmensalista_delete,
         name='core_movmensalista_delete'),
+
 ]
