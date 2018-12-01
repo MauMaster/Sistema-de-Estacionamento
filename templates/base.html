@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-sortable.css' %}">
-
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-sortable.css' %}">
+    <link href="../../static/bootstrap/css/dashboard.css" rel="stylesheet">
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -44,7 +44,7 @@
                     <a class="dropdown-item" href="{% url 'core_lista_veiculos' %}">Veiculos</a>
                     <a class="dropdown-item" href="{% url 'core_lista_movrotativos' %}">Rotativo</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'core_mensalista_novo' %}">Mensalista</a>
+                    <a class="dropdown-item" href="{% url 'core_lista_mensalista' %}">Mensalista</a>
                 </div>
             </li>
 

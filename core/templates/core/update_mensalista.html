@@ -1,7 +1,10 @@
-{%extends 'base.html' %}
+{%extends 'basenew.html' %}
 {% load bootstrap %}
 
 {% block main %}
+<main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
+<br>
+<br>
 <div class="row">
     <div class="col">
         <h2>UpDating Mensalista: {{ mensalista }}</h2>
@@ -18,4 +21,5 @@
         </form>
     </div>
 </div>
+</main>
 {% endblock %}

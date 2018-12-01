@@ -52,7 +52,7 @@ class Veiculo(models.Model):
     proprietario = models.ForeignKey(
         Pessoa, on_delete=models.CASCADE, blank=False, )
     cor = models.CharField(max_length=15, blank=False)
-    observacoes = models.TextField(blank=False)
+   
 
     def __str__(self):
         return self.modelo + ' - ' + self.placa
@@ -104,13 +104,18 @@ class Mensalista(models.Model):
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE, blank=False)
     inicio = models.DateField(blank=False)
     validade = models.DateField(blank=False)
-    proprietario = models.ForeignKey(
-        Pessoa, blank=False, on_delete=models.CASCADE)
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE, blank=False)
     valor_mes = models.DecimalField(
         max_digits=6, decimal_places=2, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
 
-    
+    @property
+    def proprietario(self):
+        return self.veiculo.proprietario
+
+    @property
+    def email(self):
+        return self.pessoa.email
 
     def mensal(self):
         return math.ceil((self.validade - self.inicio).total_seconds() / 86400)
@@ -123,6 +128,20 @@ class Mensalista(models.Model):
 
     def __str__(self):
         return str(self.veiculo) + ' - ' + str(self.inicio)
+
+    def send_email(self):
+            if self.pago == 'Sim':
+                assunto =  'Comprovante pagamento Estacione Aqui 24 Horas'
+                mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Ativação do estacionamento dia :  ' + str(self.inicio) + 'Com validade até o dia   ' + str(self.validade) + '  Confirmamos o pagamento do valor de: ' + str(self.total_mes_pagar) + '   E aguardamos seu retorno '
+                recipient_list = [self.email]
+
+                send_mail(
+                    assunto,
+                    mensagem,
+                    'estacioneaqui24@gmail.com',
+                    [recipient_list],
+                    fail_silently=False,
+                )
 
 
 class MovMensalista(models.Model):

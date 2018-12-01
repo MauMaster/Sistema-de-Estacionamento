@@ -34,11 +34,26 @@ def before_movrotativo_save(sender, **kwargs):
         print('Send email')
         instance.send_email()
 
+@receiver(post_save, sender=Mensalista)
+def before_mensalista_save(sender, **kwargs):
+    print(kwargs)
+    instance = kwargs['instance']
+    if instance.pago == 'Sim':
+        print('Send email')
+        instance.send_email()
+
 @login_required
 def home(request):
     context = {'mensagem': 'Ola Mundo...'}
     return render(request, 'core/index.html', context)
 
+
+
+@login_required
+def dashboard(request):
+    mov_rot = MovRotativo.objects.all()
+    data = {"mov_rot": mov_rot}
+    return render(request, 'core/dashboard.html', data)
 
 @login_required
 def lista_pessoas(request):
@@ -139,8 +154,7 @@ def lista_movrotativos(request):
     mov_rot = MovRotativo.objects.all()
     form = MovRotativoForm()
     data = {'form': form, "mov_rot": mov_rot}
-    return render(
-        request, 'core/lista_movrotativos.html', data)
+    return render(request, 'core/lista_movrotativos.html', data)
 
 
 @login_required

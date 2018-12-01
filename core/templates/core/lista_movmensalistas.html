@@ -21,19 +21,21 @@
                         <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Mensalista</th>
-                        <th scope="col">Início</th>
+                        <th scope="col">Validade</th>
                         <th scope="col">Valor-Mês</th>
-                        <th scope="col">Pagar</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Nome</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for mov in mov_mensalistas %}
                         <tr>
                         <th scope="row" >{{mov.id}}</th>
-                        <td > <a href="{%  url 'core_movmensalista_update' mov.id  %}" style="color:black">{{mov.veiculo}} </a></td>
-                        <td><a href="{%  url 'core_movmensalista_update' mov.id  %}" style="color:black">{{mov.inicio}}</a></td>
+                        <td > <a href="{%  url 'core_movmensalista_update' mov.id  %}" style="color:black">{{mov.veiculo.placa}} </a></td>
+                        <td><a href="{%  url 'core_movmensalista_update' mov.id  %}" style="color:black">{{mov.validade}}</a></td>
                         <td><a href="{%  url 'core_movmensalista_update' mov.id  %}" style="color:black">{{mov.valor_mes}}</a></td>
                         <td><a href="{%  url 'core_movmensalista_update' mov.id  %}" style="color:black">{{mov.mensal}}</a></td>
+                         <td><a href="{%  url 'core_movmensalista_update' mov.id  %}" style="color:black">{{mov.proprietario}}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

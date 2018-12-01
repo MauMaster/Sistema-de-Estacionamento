@@ -1,28 +1,24 @@
-{%extends 'base.html' %}
+{%extends 'basenew.html' %}
 {% load bootstrap %}
 {% load widget_tweaks %}
 {% block main %}
-<div class="row">
-    <div class="col-sm-3">
+
+<main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
+<div class="col-sm-12">
+<br><br><br>
       <h2>Lista Mensalista</h2>
         <form action="{%  url 'core_mensalista_novo'  %}" method="POST" novalidate >
-              
+              <div class="form-row">
             {% csrf_token %}
 
   {% for hidden_field in form.hidden_fields %}
     {{ hidden_field }}
   {% endfor %}
 
-  {% if form.non_field_errors %}
-    <div class="alert alert-danger" role="alert">
-      {% for error in form.non_field_errors %}
-        {{ error }}
-      {% endfor %}
-    </div>
-  {% endif %}
+  
 
   {% for field in form.visible_fields %}
-    <div class="form-group">
+    <div class="form-group col-md-2">
       {{ field.label_tag }}
 
       {% if form.is_bound %}
@@ -48,14 +44,14 @@
 
 
             <button type="submit" class="btn btn-primary">Cadastrar</button>
-
+</div>
         </form>
     </div>
 
-    <div class="col-sm-9">
+    <div class="col-sm-12">
             <h2>Lista Mensalistas</h2>
-            <table class="table table-striped">
-                    <thead class="thead-dark">
+            <table class="table table-bordered sortable" >
+                    <thead class="p-3 mb-2 bg-primary text-white">
                         <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Veículo</th>
@@ -63,14 +59,14 @@
                         <th scope="col">Proprietário</th>
                         <th scope="col">Valor Mês</th>
                         <th scope="col">Mês</th>
-                        <th scope="col">Pagar</th>
+                        <th scope="col">Valor</th>
                         <th scope="col">Pago</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for mensalista in mensalistas %}
                         <tr>
-                        <th scope="row" >{{mensalista.id}}</th>
+                        <th scope="row"  >{{mensalista.id}}</th>
                         <td><a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.veiculo}} </a></td>
                         <td><a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.inicio}}</a></td>
                         <td><a href="{%  url 'core_mensalista_update' mensalista.id  %}" style="color:black">{{mensalista.proprietario}}</a></td>
@@ -87,5 +83,5 @@
         
     </div>
 </div>
-
+</main>
 {% endblock %}
