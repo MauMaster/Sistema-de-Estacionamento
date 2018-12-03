@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    
 
 
     <title>Estacione Aqui 24 horas</title>
@@ -53,7 +54,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'core_home' %">
+                <a class="nav-link active" href="{% url 'core_dashboard' %}">
                   <span data-feather="home"></span>
                   Home <span class="sr-only">(atual)</span>
                 </a>

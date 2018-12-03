@@ -17,6 +17,15 @@
 {% endif %}
 
 <img src="{% static 'img/logo_login.jpg' %}" alt="logo">
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Sua conta não tem acesso a esta página. 
+    Para prosseguir, por favor, faça o login com uma conta que tenha acesso.</p>
+    {% else %}
+    <p>Por favor, faça o login para ver esta página.</p>
+    {% endif %}
+{% endif %}
 {% if form.errors %}
 <p>Seu nome de usuário e senha não correspondem. Por favor, tente novamente.</p>
 {% endif %}
@@ -34,7 +43,7 @@
 </table>
 
 <input type="submit" class="btn btn-primary" value="login">
-<input type="hidden" name="next" value="{{ next }}">
+<input type="hidden" name="next" value="{% url 'core_dashboard' %}">
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}

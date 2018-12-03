@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'bootstrap_datepicker_plus',
     'bootstrap_datepicker',
+    'googlemaps',   
   
     
     

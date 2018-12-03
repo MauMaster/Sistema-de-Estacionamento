@@ -59,7 +59,6 @@ class MovRotativoForm(forms.ModelForm):
         if not checkin and not valor_hora:
             raise forms.ValidationError('Campos obriatorios')
 
-   
 
 class MensalistaForm(forms.ModelForm):
     class Meta:

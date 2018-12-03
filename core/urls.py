@@ -22,6 +22,7 @@ from .views import (
     mensalista_delete,
     movmensalista_delete,
     dashboard
+ 
 )
 
 urlpatterns = [

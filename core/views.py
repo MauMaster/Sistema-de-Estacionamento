@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import (
@@ -34,6 +33,7 @@ def before_movrotativo_save(sender, **kwargs):
         print('Send email')
         instance.send_email()
 
+
 @receiver(post_save, sender=Mensalista)
 def before_mensalista_save(sender, **kwargs):
     print(kwargs)
@@ -42,11 +42,11 @@ def before_mensalista_save(sender, **kwargs):
         print('Send email')
         instance.send_email()
 
+
 @login_required
 def home(request):
     context = {'mensagem': 'Ola Mundo...'}
     return render(request, 'core/index.html', context)
-
 
 
 @login_required
@@ -54,6 +54,7 @@ def dashboard(request):
     mov_rot = MovRotativo.objects.all()
     data = {"mov_rot": mov_rot}
     return render(request, 'core/dashboard.html', data)
+
 
 @login_required
 def lista_pessoas(request):
@@ -63,18 +64,16 @@ def lista_pessoas(request):
     return render(request, 'core/lista_pessoas.html', data)
 
 
-
 @login_required
 def pessoa_novo(request):
     if request.method == 'POST':
-            form = PessoaForm(request.POST or None)
-            if form.is_valid():
-                form.save()
-                return redirect('core_lista_pessoas')
+        form = PessoaForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_pessoas')
     else:
         form = PessoaForm
     return render(request, 'core/lista_pessoas.html', {'form': form})
-
 
 
 @login_required
@@ -113,7 +112,7 @@ def veiculo_novo(request):
     else:
         form = VeiculoForm
     return render(request, 'core/lista_veiculos.html', {'form': form})
-    
+
 
 @login_required
 def lista_veiculos(request):
@@ -194,6 +193,7 @@ def movrotativos_delete(request, id):
     else:
         return render(request, 'core/delete_confirm.html',
                       {'obj': mov_rotativo})
+
 
 
 @login_required

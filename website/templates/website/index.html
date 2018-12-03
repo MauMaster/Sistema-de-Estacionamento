@@ -1,27 +1,8 @@
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Aqui estacione inteligente</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../../static/bootstrap/css/carousel.css" rel="stylesheet">
-  </head>
+{%extends 'website/baseweb.html' %}
   {% include 'website/menu.html' %}
-  <body>
-
-    <header>
-      
-    </header>
+  
+ {% block main %}
+    
 
     <main role="main">
 
@@ -35,8 +16,8 @@
           <div class="carousel-item active">
             <img class="first-slide" src="./../static/img/slide1.jpg" alt="First slide">
             <div class="container">
-              <div class="carousel-caption text-left">
-                <h1>Fale com nossos especialiastas</h1>
+              <div class="carousel-caption text-right">
+                <h1>  Fale com nossos especialiastas</h1>
                 <p>Eles vão lhe ajudar a contratar o serviço que você precisa </p>
                 <p><a class="btn btn-lg btn-primary" href="{% url 'website_contato' %}" role="button">Entre em contato</a></p>
               </div>
@@ -45,20 +26,20 @@
           <div class="carousel-item">
             <img class="second-slide" src="./../static/img/slide2.jpg">
             <div class="container">
-              <div class="carousel-caption text-right">
+              <div class="carousel-caption text-left">
                 <h1>24 horas, 7 dias por semana</h1>
                 <p>Seu veículo protegido a cada segundo. </p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Contrate agora</a></p>
+                <p><a class="btn btn-lg btn-primary" href="https://api.whatsapp.com/send?phone=5551981349333&text=Ficamos%20felizes%20em%20atender%20voc%C3%AA!!!" role="button">Contrate agora</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
             <img class="third-slide" src="./../static/img/slide3.jpg">
             <div class="container">
-              <div class="carousel-caption text-left">
+              <div class="carousel-caption text-right">
                 <h1>Mensalista</h1>
-                <p>Usa estacionamento o mês todo? Saiba nossos preços promocionais para mensalistas.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Saiba mais/a></p>
+                <p>Usa estacionamento o mês todo?<br> Saiba nossos preços promocionais para mensalistas.</p>
+                <p><a class="btn btn-lg btn-primary" href="{% url 'website_servicos' %}" role="button">Consulte valores</a></p>
               </div>
             </div>
           </div>
@@ -84,21 +65,21 @@
         <div class="row">
           <div class="col-lg-4">
             <img class="rounded-circle" src="./../static/img/preco.jpg" width="140" height="140">
-            <h2>Valores</h2>
+            <h2>Planos</h2>
             <p>Com valores promocionais tanto para diaristas quanto mensalistas, com estilos personalizados de planos.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Veja os planos &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="{% url 'website_servicos' %}" role="button">Veja os planos &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <img class="rounded-circle" src="./../static/img/localizacao.jpg" alt="Generic placeholder image" width="140" height="140">
             <h2>Localização</h2>
             <p>Com mais de 100 estacionamentos, sempre temos um perto de você, clique aqui e nos deixe ajudar você até nós.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Clique e venha &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="{% url 'website_localizacao' %}" role="button">Clique e venha &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <img class="rounded-circle" src="./../static/img/contato.jpg" alt="Generic placeholder image" width="140" height="140">
             <h2>Contato</h2>
             <p>Ainda ficou com dúvidas? Sem problema, basta ligar e teremos o prazer de esclarecer todas as suas dúvidas</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Ligue&raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://api.whatsapp.com/send?phone=5551981349333&text=Ficamos%20felizes%20em%20atender%20voc%C3%AA!!!" role="button">Whats&raquo;</a></p>
           </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 
@@ -109,11 +90,13 @@
 
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <h2 class="featurette-heading">Acessibilidade total <span class="text-muted">para o seu conforto e segurança</span></h2>
+            <p class="lead">Nossos estacionamento estão equipados com elevadores, rampas, e pessoal treinado. Tudo para melhorar sua esperiência com nosso serviço.</p>
           </div>
           <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <br>
+          <br>
+            <img class="featurette-image img-fluid mx-auto" src="./../static/img/acessibilidade.jpg" alt="Generic placeholder image">
           </div>
         </div>
 
@@ -121,11 +104,13 @@
 
         <div class="row featurette">
           <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <h2 class="featurette-heading">Motoristas experientes,<span class="text-muted">estacionando para você.</span></h2>
+            <p class="lead">Não se preocupe em estacionar, achar vaga, aproveite seu dia, planeje suas reuniões e deixe que nossa equipe de profissionais estaciona para você.</p>
           </div>
           <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <br>
+          <br>
+            <img class="featurette-image img-fluid mx-auto" src="./../static/img/valet.jpg" alt="Generic placeholder image">
           </div>
         </div>
 
@@ -133,11 +118,11 @@
 
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <h2 class="featurette-heading">Super promoção <span class="text-muted">pague 10 e aproveite 12</span></h2>
+            <p class="lead">Isso mesmo nossa promoção válida em todas nossas filiais, você paga 10 meses de estacionamento e ganha 12 meses. E ainda pode parcelar no cartão de crédito.</p>
           </div>
           <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            <img class="featurette-image img-fluid mx-auto" src="./../static/img/promocao.jpg" alt="Generic placeholder image">
           </div>
         </div>
 
@@ -151,7 +136,7 @@
       <!-- FOOTER -->
    
     </main>
-
+{% endblock %}
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -162,5 +147,4 @@
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="../../static/bootstrap/js/holder.min.js"></script>
     {% include 'website/footer.html' %}
-  </body>
-</html>
+  

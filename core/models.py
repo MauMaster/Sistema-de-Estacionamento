@@ -67,7 +67,7 @@ class Parametros(models.Model):
 
 
 class MovRotativo(models.Model):
-    checkin = models.DateTimeField(auto_now=False, blank=False, null=False,)
+    checkin = models.DateTimeField(auto_now=True, blank=False, null=False,)
     checkout = models.DateTimeField(auto_now=False, null=True, blank=True)
     email = models.EmailField(blank=False)
     placa = models.CharField(max_length=7, blank=False)

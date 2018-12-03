@@ -8,9 +8,4 @@ class ContatoForm(forms.ModelForm):
         model = Contato
         fields = '__all__'
 
-    def clean(self):
-        cleaned_data = super(ContatoForm, self).clean()
-        nome = cleaned_data.get('nome')
-        email = cleaned_data.get('email')
-        if not nome and not email:
-            raise forms.ValidationError('Campos obriatorios')
+   

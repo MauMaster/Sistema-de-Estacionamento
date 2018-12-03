@@ -1,4 +1,4 @@
-{% extends 'website/base.html' %}
+{% extends 'website/baseweb.html' %}
 {% load static %}
 {% load bootstrap %}
 {% load widget_tweaks %}
@@ -6,20 +6,14 @@
 {% block main %}
 <br>
 <br>
+<div class="container-fluid">
 <div class="row"><p> {{mensagem}}</p></div>
 <div class="row row-space">
     
-    <div class="col-6">
+    <div class="col-12">
         <form method="POST">
             {% csrf_token %} 
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
-                </div>
-        
-            </div>
-            <div class="form-row">
+                   <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputNome">Nome</label>
                     <input type="text" class="form-control" id="inputNome" placeholder="Nome" name="nome">
@@ -28,18 +22,30 @@
                         <label for="inputSobreNome">Sobrenome</label>
                         <input type="text" class="form-control" id="inputSobreNome" placeholder="Sobrenome" name="sobrenome">
                 </div>
+                
             </div>
-            <div class="form-group">
-                    <label for="inputAddress">Endereço</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="seu endereço completo" name="endereco">
-                  </div>
-            <div class="form-row">
+                  <div class="form-row">
                 <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="Email" name="email">
+                </div>
+                <div class="form-group col-md-6">
+                        <label for="inputPhone">Telefone</label>
+                        <input type="text" class="form-control" id="inputPhone" placeholder="Seu telefone" name="telefone">
+                </div>
+         
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                        <label for="inputAddress">Endereço</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="seu endereço completo" name="endereco">
+                </div>
+         
+                <div class="form-group col-md-4">
                     <label for="inputCity">Cidade</label>
                     <input type="text" class="form-control" id="inputCity" name="cidade">
                 </div>
-        
-                <div class="form-group col-md-2">
+        <div class="form-row">
+                <div class="form-group col-md-8">
                     <label for="inputCep">CEP</label>
                     <input type="text" class="form-control" id="inputZip" name="cep">
                 </div>
@@ -49,31 +55,12 @@
 
                     </textarea>
                 </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck" name="receber_noticias">
-                    <label class="form-check-label" for="gridCheck">
-                        Receber Promoções
-                    </label>
-                </div>
-            </div>
+           
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
     </div>
-    <div class="col-6">
-        <p>
-            Mussum Ipsum, cacilds vidis litro abertis. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.
-            Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl. Pra lá ,
-            depois divoltis porris, paradis. Aenean aliquam molestie leo, vitae iaculis nisl.
-            Detraxit consequat et quo num tendi nada. Posuere libero varius. Nullam a nisl ut ante
-            blandit hendrerit. Aenean sit amet nisi. Si num tem leite então bota uma pinga aí cumpadi!
-            Copo furadis é disculpa de bebadis, arcu quam euismod magna.
-        </p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.5565750571113!2d-50.02501268489134!3d-29.
-            761543881986203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951878830c8ca26d%3A0xecdf70fb4a030c0e!2sUniasselvi!
-            5e0!3m2!1spt-BR!2sbr!4v1542035009910" width="500" height="400" frameborder="0" style="border:0" allowfullscreen>
-        </iframe>
-    </div>
+    
 
+</div>
 </div>
 {% endblock %}
