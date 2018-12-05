@@ -10,7 +10,7 @@
         <h2>UpDating MovRotativos: {{ mov_rotativo}}</h2>
 
 
-        <form action="{%  url 'core_movrotativos_update' mov_rotativo.id  %}" method="POST">
+        <form action="{%  url 'core_movrotativos_checkout' mov_rotativo.id  %}" method="POST">
             
             {% csrf_token %}
             {{form|bootstrap}}
@@ -38,11 +38,7 @@
                                  
             </table>
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <form action="{%  url 'core_movrotativos_checkout' mov_rotativo.id  %}" method="POST">
-                        <button type="submit" class="btn btn-primary">Checkout</button>
-                        </form>
-            <a href="{% url 'core_movrotativos_delete' mov_rotativo.id%}" class="btn btn-danger">Delete</a>
-            
+           
           
             
 

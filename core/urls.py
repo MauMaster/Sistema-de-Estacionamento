@@ -21,7 +21,8 @@ from .views import (
     movrotativos_delete,
     mensalista_delete,
     movmensalista_delete,
-    dashboard
+    dashboard,
+    movrotativos_checkout
  
 )
 
@@ -53,6 +54,8 @@ urlpatterns = [
         name='core_movrotativos_update'),
     url(r'^mov-rot-delete/(?P<id>\d+)/$', movrotativos_delete,
         name='core_movrotativos_delete'),
+    url(r'^mov-rot-checkout/(?P<id>\d)+/$', movrotativos_checkout,
+        name='core_movrotativos_checkout'),
 
     url(r'^mensalistas/$', lista_mensalista,
         name='core_lista_mensalista'),

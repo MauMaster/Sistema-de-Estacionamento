@@ -47,11 +47,7 @@ class MovRotativoForm(forms.ModelForm):
     class Meta:
         model = MovRotativo
         fields = '__all__'
-        widgets = {
-            'checkin':  DateTimeInput(),
-            'checkout': DateTimeInput(),
-        }
-
+       
     def clean(self):
         cleaned_data = super(MovRotativoForm, self).clean()
         checkin = cleaned_data.get('checkin')

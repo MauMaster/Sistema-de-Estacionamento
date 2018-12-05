@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.mail import send_mail
+from django.utils import timezone
 import math
 
 
@@ -19,6 +20,11 @@ STATE_CHOICES = (
 PAGO_CHOICES = (
     ('Não', 'Não Pago'),
     ('Sim', 'Pago')
+)
+
+SAIDA_CHOICES = (
+    ('Não', 'CheckIn'),
+    ('Sim', 'CheckOut')
 )
 
 
@@ -68,14 +74,15 @@ class Parametros(models.Model):
 
 class MovRotativo(models.Model):
     checkin = models.DateTimeField(auto_now=True, blank=False, null=False,)
-    checkout = models.DateTimeField(auto_now=False, null=True, blank=True)
+    checkout = models.DateTimeField(default=None, null=True, blank=True)
     email = models.EmailField(blank=False)
     placa = models.CharField(max_length=7, blank=False)
     modelo = models.CharField(max_length=15, blank=False)
     valor_hora = models.DecimalField(
         max_digits=5, decimal_places=2, null=False, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
-
+    chk = models.CharField(max_length=15, choices=SAIDA_CHOICES, default='Não')
+    
     def horas_total(self):
         if self.checkout is None:
             return self.checkout == 0
@@ -85,9 +92,16 @@ class MovRotativo(models.Model):
     def total(self):
         return self.valor_hora * self.horas_total()
 
+    def save(self, *args, **kwargs):
+        if not self.chk == 'Não':
+            self.checkout = timezone.now()
+        return super(MovRotativo, self).save(*args, **kwargs)
+
+   
+    
     def send_email(self):
         if self.pago == 'Sim':
-            assunto =  'Comprovante pagamento Estacione Aqui 24 Horas'
+            assunto = 'Comprovante pagamento Estacione Aqui 24 Horas'
             mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Seu horário de Chekin foi:  ' + str(self.checkin) + 'Seu horário de Chekou foi:   ' + str(self.checkout) + '  Confirmamos o pagamento do valor de: ' + str(self.total) + '   E aguardamos seu retorno '
             recipient_list = [self.email]
 
