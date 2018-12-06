@@ -5,6 +5,8 @@
 <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
 <br>
 <br>
+<br>
+<br>
 <div class="row">
     <div class="col">
         <h2>Updating Pessoa: {{ pessoa }}</h2>
@@ -12,9 +14,14 @@
         <form action="{% url 'core_pessoa_update' pessoa.id %}" method="POST" class="form-group col-md-3">
             {% csrf_token %}
             {{ form|bootstrap }}
-        
+            
+        <div class="row">
+         <div class="col-sm">
             <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="{% url 'core_lista_pessoas'%}" class="btn btn-info">Voltar</a> 
             <a href="{% url 'core_pessoa_delete' pessoa.id %}" class="btn btn-danger">Deletar</a>
+            </div>
+            </div>
         </form>
     </div>
 </div>

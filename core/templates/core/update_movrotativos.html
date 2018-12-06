@@ -9,7 +9,7 @@
     <div class="col">
         <h2>UpDating MovRotativos: {{ mov_rotativo}}</h2>
 
-
+<div class="row"><p> {{mensagem}}</p></div>
         <form action="{%  url 'core_movrotativos_update' mov_rotativo.id  %}" method="POST">
             
             {% csrf_token %}
@@ -22,6 +22,7 @@
                         <tr>
                         <th scope="col">Horas</th>
                         <th scope="col">Pagar</th>
+                        <th scope="col">Checkout</th>
                            </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,7 @@
                         
                         <td><a href="" style="color:black">{{mov_rotativo.horas_total}}</a></td>
                         <td><a href="" style="color:black">{{mov_rotativo.total}}</a></td>
+                         <td><a href="" style="color:black">{{mov_rotativo.checkout}}</a></td>
                                  
                         </tr>
                   
@@ -38,10 +40,11 @@
                                  
             </table>
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <form action="{%  url 'core_movrotativos_checkout' mov_rotativo.id  %}" method="POST">
-                        <button type="submit" class="btn btn-primary">Checkout</button>
-                        </form>
+            <a href="{% url 'core_lista_movrotativos'%}" class="btn btn-info">Voltar</a>     
             <a href="{% url 'core_movrotativos_delete' mov_rotativo.id%}" class="btn btn-danger">Delete</a>
+            <br>
+            <br>
+            
             
           
             

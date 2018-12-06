@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from .models import (
     Pessoa,
     Veiculo,
@@ -179,22 +180,7 @@ def movrotativos_update(request, id):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect('core_lista_movrotativos')
-    else:
-        return render(request, 'core/update_movrotativos.html', data)
-
-@login_required
-def movrotativos_checkout(request, id):
-    data = {}
-    mov_rotativo = MovRotativo.objects.get(id=id)
-    form = MovRotativoForm(request.POST or None, instance=mov_rotativo)
-    data['mov_rotativo'] = mov_rotativo
-    data['form'] = form
-
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return render('core_update_movrotativos')
+            return render(request, 'core/update_movrotativos.html', data)
     else:
         return render(request, 'core/update_movrotativos.html', data)
 

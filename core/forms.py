@@ -9,14 +9,6 @@ from .models import (
 )
 
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
-
-class DateTimeInput(forms.DateTimeInput):
-    input_type = 'datetime'
-
-
 class PessoaForm(forms.ModelForm):
     class Meta:
         model = Pessoa
@@ -37,9 +29,9 @@ class VeiculoForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(VeiculoForm, self).clean()
-        marca = cleaned_data.get('marca')
         modelo = cleaned_data.get('modelo')
-        if not marca and not modelo:
+        marca = cleaned_data.get('marca')
+        if not modelo and not marca:
             raise forms.ValidationError('Campos obriatorios')
 
 
@@ -60,11 +52,7 @@ class MensalistaForm(forms.ModelForm):
     class Meta:
         model = Mensalista
         fields = '__all__'
-        widgets = {
-            'inicio': DateInput(),
-            'validade': DateInput()
-        }
-
+        
     def clean(self):
         cleaned_data = super(MensalistaForm, self).clean()
         veiculo = cleaned_data.get('veiculo')

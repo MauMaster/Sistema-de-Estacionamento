@@ -15,8 +15,33 @@
             {% csrf_token %}
             {{form|bootstrap}}
 
+<table  class="table table-bordered sortable"  >
+                    <thead class="p-3 mb-2 bg-primary text-white">
+                        <tr>
+                        <th scope="col">Validade</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Nome</th>
+                           </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                        
+                        <td><a href="" style="color:black">{{mensalista.validade}}</a></td>
+                        <td><a href="" style="color:black">{{mensalista.valor_mes}}</a></td>
+                         <td><a href="" style="color:black">{{mensalista.proprietario}}</a></td>
+                                 
+                        </tr>
+                  
+                    </tbody>
+                  
+                                 
+            </table>
             <button type="submit" class="btn btn-primary">Salvar</button>
+                       <a href="{% url 'core_lista_mensalista'%}" class="btn btn-info">Voltar</a> 
             <a href="{% url 'core_mensalista_delete' mensalista.id %}" class="btn btn-danger">Delete</a>
+            <br>
+            <br>
 
         </form>
     </div>

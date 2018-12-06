@@ -1,8 +1,7 @@
 from django.db import models
 from django.core.mail import send_mail
+import math, datetime
 from django.utils import timezone
-import math
-
 
 STATE_CHOICES = (
     ('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'),
@@ -73,8 +72,8 @@ class Parametros(models.Model):
 
 
 class MovRotativo(models.Model):
-    checkin = models.DateTimeField(auto_now=True, blank=False, null=False,)
-    checkout = models.DateTimeField(default=None, null=True, blank=True)
+    checkin = models.DateTimeField(("Date"), default=timezone.now())
+    checkout = models.DateTimeField(null=True, blank=True)
     email = models.EmailField(blank=False)
     placa = models.CharField(max_length=7, blank=False)
     modelo = models.CharField(max_length=15, blank=False)
@@ -116,11 +115,12 @@ class MovRotativo(models.Model):
 
 class Mensalista(models.Model):
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE, blank=False)
-    inicio = models.DateField(blank=False)
-    validade = models.DateField(blank=False)
+    inicio = models.DateField(("Date"), default=datetime.date.today)
+    validade = models.DateField(("Date"), blank=False, )
     pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE, blank=False)
     valor_mes = models.DecimalField(
         max_digits=6, decimal_places=2, blank=False)
+    email = models.ForeignKey(Pessoa, on_delete=models.CASCADE, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
 
     @property
