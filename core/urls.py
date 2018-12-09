@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from .views import (
     home,
+    get_data,
+    ChartData,
     lista_pessoas,
     lista_veiculos,
     lista_movrotativos,
@@ -22,12 +24,14 @@ from .views import (
     mensalista_delete,
     movmensalista_delete,
     dashboard
+    
  
 )
 
 urlpatterns = [
-    url(r'^home/$', home, name='core_home'),
-
+    url(r'^home/$', home.as_view(), name='core_home'),
+    url(r'^api/data/$', get_data, name='api-data'),
+    url(r'^api/chart/data/$', ChartData.as_view()),
     
     url(r'^dashboard/$', dashboard, name='core_dashboard'),
 

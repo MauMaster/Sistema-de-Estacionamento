@@ -56,8 +56,15 @@
         
         <div class="col-sm-12">
                 <h2>Lista Pessoas</h2>
-                <table class="table table-bordered sortable"">
-                        <thead class="thead-dark">
+                 {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+                <table class="table table-bordered sortable">
+                        <thead class="p-3 mb-2 bg-primary text-white">
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Nome</th>
@@ -82,5 +89,9 @@
                            
         
     </div>
+     <br>
+    {% include 'core/footer.html' %}
     </main>
+   
+  
 {% endblock %}

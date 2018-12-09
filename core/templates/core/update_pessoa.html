@@ -8,15 +8,50 @@
 <br>
 <br>
 <div class="row">
-    <div class="col">
+    <div class="col-sm-12">
         <h2>Updating Pessoa: {{ pessoa }}</h2>
 
-        <form action="{% url 'core_pessoa_update' pessoa.id %}" method="POST" class="form-group col-md-3">
+        <form action="{% url 'core_pessoa_update' pessoa.id %}" method="POST">
             {% csrf_token %}
-            {{ form|bootstrap }}
+             <div class="form-row">
+            <div class="form-group col-md-6">
+            {{ form.nome|bootstrap }}
+            </div>
+            <div class="form-group col-md-6">
+            {{ form.email|bootstrap }}
+            </div>
+            </div>
+            <div class="form-row">
+            <div class="form-group col-md-6">
+            {{ form.telefone|bootstrap }}
+            </div>
+            <div class="form-group col-md-6">
+            {{ form.cpf|bootstrap }}
+            </div>
+            </div>
+             <div class="form-row">
+            <div class="form-group col-md-8">
+            {{ form.endereco|bootstrap }}
+             </div>
+              <div class="form-group col-md-4">
+            {{ form.numero|bootstrap }}
+             </div>
+              </div>
+               <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.bairro|bootstrap }}
+            </div>
+            <div class="form-group col-md-4">
+            {{ form.cidade|bootstrap }}
+            </div>
+            <div class="form-group col-md-4">
+            {{ form.estado|bootstrap }}
+            </div>
+            </div>
             
         <div class="row">
          <div class="col-sm">
+       
             <button type="submit" class="btn btn-primary">Salvar</button>
                         <a href="{% url 'core_lista_pessoas'%}" class="btn btn-info">Voltar</a> 
             <a href="{% url 'core_pessoa_delete' pessoa.id %}" class="btn btn-danger">Deletar</a>
@@ -26,4 +61,5 @@
     </div>
 </div>
 </main>
+ {% include 'core/footer.html' %}
 {% endblock %}

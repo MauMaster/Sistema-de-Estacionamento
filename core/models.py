@@ -72,7 +72,7 @@ class Parametros(models.Model):
 
 
 class MovRotativo(models.Model):
-    checkin = models.DateTimeField(("Date"), default=timezone.now())
+    checkin = models.DateTimeField( default=timezone.now())
     checkout = models.DateTimeField(null=True, blank=True)
     email = models.EmailField(blank=False)
     placa = models.CharField(max_length=7, blank=False)
@@ -80,7 +80,7 @@ class MovRotativo(models.Model):
     valor_hora = models.DecimalField(
         max_digits=5, decimal_places=2, null=False, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
-    chk = models.CharField(max_length=15, choices=SAIDA_CHOICES, default='Não')
+    chk = models.CharField(("Situação"),max_length=15, choices=SAIDA_CHOICES, default='Não')
     
     def horas_total(self):
         if self.checkout is None:
@@ -115,8 +115,8 @@ class MovRotativo(models.Model):
 
 class Mensalista(models.Model):
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE, blank=False)
-    inicio = models.DateField(("Date"), default=datetime.date.today)
-    validade = models.DateField(("Date"), blank=False, )
+    inicio = models.DateField(("Início"), default=datetime.date.today)
+    validade = models.DateField(("Validade"), blank=False, )
     pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE, blank=False)
     valor_mes = models.DecimalField(
         max_digits=6, decimal_places=2, blank=False)

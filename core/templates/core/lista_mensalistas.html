@@ -50,6 +50,13 @@
 
     <div class="col-sm-12">
             <h2>Lista Mensalistas</h2>
+                {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
             <table class="table table-bordered sortable" >
                     <thead class="p-3 mb-2 bg-primary text-white">
                         <tr>
@@ -84,4 +91,5 @@
     </div>
 </div>
 </main>
+ {% include 'core/footer.html' %}
 {% endblock %}

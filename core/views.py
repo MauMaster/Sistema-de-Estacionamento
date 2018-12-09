@@ -2,6 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import json
+from django.views.generic import View
+from django.http import JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.contrib.auth import get_user_model
+from django.contrib import messages
 
 from .models import (
     Pessoa,
@@ -19,6 +26,8 @@ from .forms import (
     MovMensalistaForm
 
 )
+
+User = get_user_model()
 
 
 @login_required
@@ -44,12 +53,40 @@ def before_mensalista_save(sender, **kwargs):
         instance.send_email()
 
 
-@login_required
-def home(request):
-    context = {'mensagem': 'Ola Mundo...'}
-    return render(request, 'core/index.html', context)
+class home(View):
+    def get(sel, request, *args, **kwargs):
+        return render(request, 'core/index.html', {"customers": 10})
 
 
+def get_data(request, *args, **kwargs):
+    data = {
+        "sales": 100,
+        "customers": 10,
+    }
+    return JsonResponse(data)
+
+
+class ChartData(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+        qs_count = User.objects.all().count()
+        checkin = MovRotativo.objects.all().count()
+        clientes = Pessoa.objects.all().count()
+        veiculos = Veiculo.objects.all().count()
+        mensalistas = Mensalista.objects.all().count()
+        labels = ["Usúario", "Checkin", "clientes", "veiculos", "mensalistas"]
+        default_items = [qs_count, checkin, clientes, veiculos, mensalistas]
+        data = {
+            "labels": labels,
+            "default": default_items,
+
+        }
+        return Response(data)
+
+    
 @login_required
 def dashboard(request):
     mov_rot = MovRotativo.objects.all()
@@ -71,6 +108,7 @@ def pessoa_novo(request):
         form = PessoaForm(request.POST or None)
         if form.is_valid():
             form.save()
+            messages.success(request, "Pessoas adicionado com sucesso")
             return redirect('core_lista_pessoas')
     else:
         form = PessoaForm
@@ -88,6 +126,7 @@ def pessoa_update(request, id):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+            messages.success(request, "Cadastro alterado com sucesso")
             return redirect('core_lista_pessoas')
     else:
         return render(request, 'core/update_pessoa.html', data)
@@ -98,6 +137,7 @@ def pessoa_delete(request, id):
     pessoa = Pessoa.objects.get(id=id)
     if request.method == 'POST':
         pessoa.delete()
+        messages.success(request, "Cadastro deletado com sucesso")
         return redirect('core_lista_pessoas')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': pessoa})
@@ -109,6 +149,7 @@ def veiculo_novo(request):
         form = VeiculoForm(request.POST or None)
         if form.is_valid():
             form.save()
+            messages.success(request, "Veículo adicionado com sucesso")
             return redirect('core_lista_veiculos')
     else:
         form = VeiculoForm
@@ -134,7 +175,9 @@ def veiculo_update(request, id):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+            messages.success(request, "Veículo alterado com sucesso")
             return redirect('core_lista_veiculos')
+            
     else:
         return render(request, 'core/update_veiculo.html', data)
 
@@ -144,6 +187,7 @@ def veiculo_delete(request, id):
     veiculo = Veiculo.objects.get(id=id)
     if request.method == 'POST':
         veiculo.delete()
+        messages.success(request, "Veículo deletado com sucesso")
         return redirect('core_lista_veiculos')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': veiculo})
@@ -157,12 +201,25 @@ def lista_movrotativos(request):
     return render(request, 'core/lista_movrotativos.html', data)
 
 
+def movrotativos_grafico(request):
+    queryset = MovRotativo.objects.all()
+    placa = [obj.placa for obj in queryset]
+    modelo = [obj.modelo for obj in queryset]
+
+    context = {
+        'placa': json.dumps(placa),
+        'modelo': json.dumps(modelo),
+    }
+    return render(request, 'core/dashboard.html', context)
+
+
 @login_required
 def movrotativos_novo(request):
     if request.method == 'POST':
         form = MovRotativoForm(request.POST or None)
         if form.is_valid():
             form.save()
+            messages.success(request, "Movimento Rotativo adicionado com sucesso")
             return redirect('core_lista_movrotativos')
     else:
         form = MensalistaForm
@@ -180,6 +237,7 @@ def movrotativos_update(request, id):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+            messages.success(request, "Cadastro alterado com sucesso")
             return render(request, 'core/update_movrotativos.html', data)
     else:
         return render(request, 'core/update_movrotativos.html', data)
@@ -190,11 +248,11 @@ def movrotativos_delete(request, id):
     mov_rotativo = MovRotativo.objects.get(id=id)
     if request.method == 'POST':
         mov_rotativo.delete()
+        messages.success(request, "Cadastro deletado com sucesso")
         return redirect('core_lista_movrotativos')
     else:
         return render(request, 'core/delete_confirm.html',
                       {'obj': mov_rotativo})
-
 
 
 @login_required
@@ -212,6 +270,7 @@ def mensalista_novo(request):
         form = MensalistaForm(request.POST or None)
         if form.is_valid():
             form.save()
+            messages.success(request, "Mensalista adicionado com sucesso")
             return redirect('core_lista_mensalista')
     else:
         form = MensalistaForm
@@ -229,6 +288,7 @@ def mensalista_update(request, id):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+            messages.success(request, "Cadastro alterado com sucesso")
             return redirect('core_lista_mensalista')
     else:
         return render(request, 'core/update_mensalista.html', data)
@@ -239,6 +299,7 @@ def mensalista_delete(request, id):
     mensalista = Mensalista.objects.get(id=id)
     if request.method == 'POST':
         mensalista.delete()
+        messages.success(request, "Cadastro deletado com sucesso")
         return redirect('core_lista_mensalista')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': mensalista})
@@ -282,6 +343,7 @@ def movmensalista_delete(request, id):
     mov_mensalista = MovMensalista.objects.get(id=id)
     if request.method == 'POST':
         mov_mensalista.delete()
+        messages.success(request, "Cadastro deletado com sucesso")
         return redirect('core_lista_movmensalista')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': mov_mensalista})

@@ -13,9 +13,34 @@
         <form action="{%  url 'core_movrotativos_update' mov_rotativo.id  %}" method="POST">
             
             {% csrf_token %}
-            {{form|bootstrap}}
-            
-
+            <div class="form-row">
+            <div class="form-group col-md-3">
+            {{form.checkin|bootstrap}}
+            </div>
+            <div class="form-group col-md-3">
+            {{form.checkout|bootstrap}}
+            </div>
+            <div class="form-group col-md-6">
+            {{form.email|bootstrap}}
+                </div>
+              </div>
+              <div class="form-row">
+            <div class="form-group col-md-2">
+            {{form.placa|bootstrap}}
+            </div>
+             <div class="form-group col-md-3">
+            {{form.modelo|bootstrap}}
+            </div>
+             <div class="form-group col-md-2">
+            {{form.valor_hora|bootstrap}}
+            </div>
+             <div class="form-group col-md-2">
+            {{form.pago|bootstrap}}
+            </div>
+             <div class="form-group col-md-3">
+            {{form.chk|bootstrap}}
+            </div>
+            </div>
             
             <table  class="table table-bordered sortable"  >
                     <thead class="p-3 mb-2 bg-primary text-white">
@@ -39,9 +64,17 @@
                   
                                  
             </table>
+                {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
                         <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="{% url 'core_lista_movrotativos'%}" class="btn btn-info">Voltar</a>     
             <a href="{% url 'core_movrotativos_delete' mov_rotativo.id%}" class="btn btn-danger">Delete</a>
+            
             <br>
             <br>
             
@@ -54,4 +87,5 @@
     </div>
 </div>
 </main>
+ {% include 'core/footer.html' %}
 {% endblock %}

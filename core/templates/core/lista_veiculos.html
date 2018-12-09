@@ -49,9 +49,18 @@
             <button type="submit" class="btn btn-primary">Cadastrar</button>
 
         </form>
+      
     </div>
     <div class="col-sm-12">
         <h2>Lista Veículos</h2>
+         {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+            
         <table class="table table-bordered sortable">
             <thead class="p-3 mb-2 bg-primary text-white">
                 <tr>
@@ -78,5 +87,8 @@
 
     </div>
 </div>
+  <br>
+    {% include 'core/footer.html' %}
 </main>
+
 {% endblock %}

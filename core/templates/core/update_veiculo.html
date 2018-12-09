@@ -13,7 +13,26 @@
         <form action="{%  url 'core_veiculo_update' veiculo.id  %}" method="POST">
                 
             {% csrf_token %}
-            {{form|bootstrap}}
+            <div class="form-row">
+            <div class="form-group col-md-6">
+            {{form.marca|bootstrap}}
+            </div>
+             <div class="form-group col-md-6">
+            {{form.modelo|bootstrap}}
+            </div>
+            </div>
+            <div class="form-row">
+            <div class="form-group col-md-4">
+            {{form.ano|bootstrap}}
+            </div>
+            <div class="form-group col-md-4">
+            {{form.placa|bootstrap}}
+             </div>
+             <div class="form-group col-md-4">
+            {{form.cor|bootstrap}}
+            </div>
+            </div>
+            {{form.proprietario|bootstrap}}
         <div class="row">
          <div class="col-8">
             <button type="submit" class="btn btn-primary">Salvar</button>
@@ -26,4 +45,5 @@
     </div>
 </div>
 </main>
+  {% include 'core/footer.html' %}
 {% endblock %}
