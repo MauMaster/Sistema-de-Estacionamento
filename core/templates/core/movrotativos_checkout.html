@@ -3,49 +3,42 @@
 
 {% block main %}
 <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
-<br>
-<br><br>
-<div class="row">
-    <div class="col">
-        <h2>UpDating MovRotativos: {{ mov_rotativo}}</h2>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col">
+            <h2>UpDating MovRotativos: {{ mov_rotativo}}</h2>
 
+            <form action="{%  url 'core_movrotativos_checkout' mov_rotativo.id  %}" method="POST">
 
-        <form action="{%  url 'core_movrotativos_checkout' mov_rotativo.id  %}" method="POST">
-            
-            {% csrf_token %}
-            {{form|bootstrap}}
-            
+                {% csrf_token %} {{form|bootstrap}}
 
-            
-            <table  class="table table-bordered sortable"  >
+                <table class="table table-bordered sortable">
                     <thead class="p-3 mb-2 bg-primary text-white">
                         <tr>
-                        <th scope="col">Horas</th>
-                        <th scope="col">Pagar</th>
-                           </tr>
+                            <th scope="col">Horas</th>
+                            <th scope="col">Pagar</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        
+
                         <tr>
-                        
-                        <td><a href="" style="color:black">{{mov_rotativo.horas_total}}</a></td>
-                        <td><a href="" style="color:black">{{mov_rotativo.total}}</a></td>
-                                 
+
+                            <td><a href="" style="color:black">{{mov_rotativo.horas_total}}</a></td>
+                            <td><a href="" style="color:black">{{mov_rotativo.total}}</a></td>
+
                         </tr>
-                  
+
                     </tbody>
-                  
-                                 
-            </table>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-           
-          
-            
 
-        </form>
+                </table>
+                <button type="submit" class="btn btn-primary">Salvar</button>
 
+            </form>
+
+        </div>
     </div>
-</div>
 </main>
  {% include 'core/footer.html' %}
 {% endblock %}

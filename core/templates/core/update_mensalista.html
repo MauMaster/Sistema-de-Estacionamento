@@ -3,72 +3,66 @@
 
 {% block main %}
 <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
-<br>
-<br>
-<div class="row">
-    <div class="col">
-        <h2>UpDating Mensalista: {{ mensalista }}</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col">
+            <h2>UpDating Mensalista: {{ mensalista }}</h2>
 
+            <form action="{%  url 'core_mensalista_update' mensalista.id  %}" method="POST">
 
-        <form action="{%  url 'core_mensalista_update' mensalista.id  %}" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        {{form.veiculo|bootstrap}}
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            {{form.inicio|bootstrap}}
+                        </div>
+                        <div class="form-group col-md-3">
+                            {{form.validade|bootstrap}}
+                        </div>
 
-            {% csrf_token %}
-            <div class="form-row">
-            <div class="form-group col-md-2">
-            {{form.inicio|bootstrap}}
-             </div>
-            <div class="form-group col-md-2">
-            {{form.validade|bootstrap}}
-             </div>
-            <div class="form-group col-md-4">
-            {{form.veiculo|bootstrap}}
-             </div>
-             <div class="form-group col-md-2">
-             {{form.valor_mes|bootstrap}}
-              </div>
-             <div class="form-group col-md-2">
-             {{form.pago|bootstrap}}
-              </div>
-              </div>
-              <div class="form-row">
-            <div class="form-group col-md-12">
-            {{form.pessoa|bootstrap}}
-            </div>
-              </div>
-            
-            
-           
-<table  class="table table-bordered sortable"  >
-                    <thead class="p-3 mb-2 bg-primary text-white">
-                        <tr>
-                        <th scope="col">Validade</th>
-                        <th scope="col">Valor</th>
-                        <th scope="col">Nome</th>
-                           </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr>
-                        
-                        <td><a href="" style="color:black">{{mensalista.validade}}</a></td>
-                        <td><a href="" style="color:black">{{mensalista.valor_mes}}</a></td>
-                         <td><a href="" style="color:black">{{mensalista.proprietario}}</a></td>
-                                 
-                        </tr>
-                  
-                    </tbody>
-                  
-                                 
-            </table>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-                       <a href="{% url 'core_lista_mensalista'%}" class="btn btn-info">Voltar</a> 
-            <a href="{% url 'core_mensalista_delete' mensalista.id %}" class="btn btn-danger">Delete</a>
-            <br>
-            <br>
+                        <div class="form-group col-md-3">
+                            {{form.valor_mes|bootstrap}}
+                        </div>
+                        <div class="form-group col-md-3">
+                            {{form.pago|bootstrap}}
+                        </div>
+                    </div>
 
-        </form>
-    </div>
-</div>
+                    <table class="table table-bordered sortable">
+                        <thead class="p-3 mb-2 bg-primary text-white">
+                            <tr>
+                                <th scope="col">Validade</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+
+                                <td><a href="" style="color:black">{{mensalista.validade}}</a></td>
+                                <td><a href="" style="color:black">{{mensalista.valor_mes}}</a></td>
+                                <td><a href="" style="color:black">{{mensalista.total_mes_pagar}}</a></td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="{% url 'core_lista_mensalista'%}" class="btn btn-info">Voltar</a>
+                    <a href="{% url 'core_mensalista_delete' mensalista.id %}" class="btn btn-danger">Delete</a>
+                    <br>
+                    <br>
+
+            </form>
+
 </main>
  {% include 'core/footer.html' %}
 {% endblock %}

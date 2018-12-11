@@ -3,89 +3,87 @@
 
 {% block main %}
 <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
-<br>
-<br><br>
-<div class="row">
-    <div class="col">
-        <h2>UpDating MovRotativos: {{ mov_rotativo}}</h2>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col">
+            <h2>UpDating MovRotativos: {{ mov_rotativo}}</h2>
 
-<div class="row"><p> {{mensagem}}</p></div>
-        <form action="{%  url 'core_movrotativos_update' mov_rotativo.id  %}" method="POST">
-            
-            {% csrf_token %}
-            <div class="form-row">
-            <div class="form-group col-md-3">
-            {{form.checkin|bootstrap}}
+            <div class="row">
+                <p> {{mensagem}}</p>
             </div>
-            <div class="form-group col-md-3">
-            {{form.checkout|bootstrap}}
-            </div>
-            <div class="form-group col-md-6">
-            {{form.email|bootstrap}}
+            <form action="{%  url 'core_movrotativos_update' mov_rotativo.id  %}" method="POST">
+
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        {{form.checkin|bootstrap}}
+                    </div>
+                    <div class="form-group col-md-3">
+                        {{form.checkout|bootstrap}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{form.email|bootstrap}}
+                    </div>
                 </div>
-              </div>
-              <div class="form-row">
-            <div class="form-group col-md-2">
-            {{form.placa|bootstrap}}
-            </div>
-             <div class="form-group col-md-3">
-            {{form.modelo|bootstrap}}
-            </div>
-             <div class="form-group col-md-2">
-            {{form.valor_hora|bootstrap}}
-            </div>
-             <div class="form-group col-md-2">
-            {{form.pago|bootstrap}}
-            </div>
-             <div class="form-group col-md-3">
-            {{form.chk|bootstrap}}
-            </div>
-            </div>
-            
-            <table  class="table table-bordered sortable"  >
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        {{form.placa|bootstrap}}
+                    </div>
+                    <div class="form-group col-md-3">
+                        {{form.modelo|bootstrap}}
+                    </div>
+                    <div class="form-group col-md-2">
+                        {{form.valor_hora|bootstrap}}
+                    </div>
+                    <div class="form-group col-md-2">
+                        {{form.pago|bootstrap}}
+                    </div>
+                    <div class="form-group col-md-3">
+                        {{form.chk|bootstrap}}
+                    </div>
+                </div>
+
+                <table class="table table-bordered sortable">
                     <thead class="p-3 mb-2 bg-primary text-white">
                         <tr>
-                        <th scope="col">Horas</th>
-                        <th scope="col">Pagar</th>
-                        <th scope="col">Checkout</th>
-                           </tr>
+                            <th scope="col">Horas</th>
+                            <th scope="col">Pagar</th>
+                            <th scope="col">Checkout</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        
+
                         <tr>
-                        
-                        <td><a href="" style="color:black">{{mov_rotativo.horas_total}}</a></td>
-                        <td><a href="" style="color:black">{{mov_rotativo.total}}</a></td>
-                         <td><a href="" style="color:black">{{mov_rotativo.checkout}}</a></td>
-                                 
+
+                            <td><a href="" style="color:black">{{mov_rotativo.horas_total}}</a></td>
+                            <td><a href="" style="color:black">{{mov_rotativo.total}}</a></td>
+                            <td><a href="" style="color:black">{{mov_rotativo.checkout}}</a></td>
+
                         </tr>
-                  
+
                     </tbody>
-                  
-                                 
-            </table>
+
+                </table>
                 {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{% url 'core_lista_movrotativos'%}" class="btn btn-info">Voltar</a>     
-            <a href="{% url 'core_movrotativos_delete' mov_rotativo.id%}" class="btn btn-danger">Delete</a>
-            
-            <br>
-            <br>
-            
-            
-          
-            
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'core_lista_movrotativos'%}" class="btn btn-info">Voltar</a>
+                <a href="{% url 'core_movrotativos_delete' mov_rotativo.id%}" class="btn btn-danger">Delete</a>
 
-        </form>
+                <br>
+                <br>
 
+            </form>
+
+        </div>
     </div>
-</div>
 </main>
  {% include 'core/footer.html' %}
 {% endblock %}

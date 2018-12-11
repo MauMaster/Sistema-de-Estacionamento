@@ -7,60 +7,60 @@
 <br>
 <br>
 <div class="container-fluid">
-<div class="row"><p> {{mensagem}}</p></div>
-<div class="row row-space">
-    
-    <div class="col-12">
-        <form method="POST">
-            {% csrf_token %} 
-                   <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputNome">Nome</label>
-                    <input type="text" class="form-control" id="inputNome" placeholder="Nome" name="nome">
-                </div>
-                <div class="form-group col-md-6">
+    <div class="row">
+        <p> {{mensagem}}</p>
+    </div>
+    <div class="row row-space">
+
+        <div class="col-12">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputNome">Nome</label>
+                        <input type="text" class="form-control" id="inputNome" placeholder="Nome" name="nome">
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="inputSobreNome">Sobrenome</label>
                         <input type="text" class="form-control" id="inputSobreNome" placeholder="Sobrenome" name="sobrenome">
+                    </div>
+
                 </div>
-                
-            </div>
-                  <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="Email" name="email">
-                </div>
-                <div class="form-group col-md-6">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="text" class="form-control" id="inputEmail4" placeholder="Email" name="email">
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="inputPhone">Telefone</label>
                         <input type="text" class="form-control" id="inputPhone" placeholder="Seu telefone" name="telefone">
-                </div>
-         
-            <div class="form-row">
-            <div class="form-group col-md-6">
-                        <label for="inputAddress">Endereço</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="seu endereço completo" name="endereco">
-                </div>
-         
-                <div class="form-group col-md-4">
-                    <label for="inputCity">Cidade</label>
-                    <input type="text" class="form-control" id="inputCity" name="cidade">
-                </div>
-        <div class="form-row">
-                <div class="form-group col-md-8">
-                    <label for="inputCep">CEP</label>
-                    <input type="text" class="form-control" id="inputZip" name="cep">
-                </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">Endereço</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="seu endereço completo" name="endereco">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputCity">Cidade</label>
+                            <input type="text" class="form-control" id="inputCity" name="cidade">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label for="inputCep">CEP</label>
+                                <input type="text" class="form-control" id="inputZip" name="cep">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="" cols="72" rows="10" class="form-control" name="mensagem">
+
+                            </textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
             </div>
-                <div class="form-group">
-                    <textarea  id="" cols="72" rows="10" class="form-control" name="mensagem">
 
-                    </textarea>
-                </div>
-           
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-    </div>
-    
-
-</div>
-</div>
+            </div>
 {% endblock %}

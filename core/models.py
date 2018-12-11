@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.mail import send_mail
-import math, datetime
+import math
+import datetime
+from django.core.validators import RegexValidator
 from django.utils import timezone
 
 STATE_CHOICES = (
@@ -30,7 +32,16 @@ SAIDA_CHOICES = (
 class Pessoa(models.Model):
     nome = models.CharField(max_length=50, blank=False)
     email = models.EmailField(blank=False)
-    cpf = models.CharField(max_length=11, unique=True, blank=False)
+    cpf = models.CharField(unique=True, max_length=11, validators=[
+            RegexValidator(
+                r'[0-9]',
+                'Use somente número',
+                'Precisa contar 11'
+            ),
+        
+        ],
+        
+    )
     endereco = models.CharField(max_length=50)
     numero = models.CharField(max_length=10)
     bairro = models.CharField(max_length=30)
@@ -39,7 +50,7 @@ class Pessoa(models.Model):
     estado = models.CharField(max_length=2, choices=STATE_CHOICES)
 
     def __str__(self):
-        return str(self.nome) + ' - ' + str(self.email) 
+        return str(self.nome) + ' - ' + str(self.email)
 
 
 class Marca(models.Model):
@@ -52,15 +63,14 @@ class Marca(models.Model):
 class Veiculo(models.Model):
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE, blank=False)
     modelo = models.CharField(max_length=20, blank=False)
-    ano = models.CharField(max_length=7)
+    ano = models.CharField(max_length=7, default="2018")
     placa = models.CharField(max_length=7)
     proprietario = models.ForeignKey(
         Pessoa, on_delete=models.CASCADE, blank=False, )
     cor = models.CharField(max_length=15, blank=False)
-   
 
     def __str__(self):
-        return self.modelo + ' - ' + self.placa
+        return str(self.modelo) + ' - ' + str(self.placa)+ ' - ' + str(self.proprietario)
 
 
 class Parametros(models.Model):
@@ -72,7 +82,7 @@ class Parametros(models.Model):
 
 
 class MovRotativo(models.Model):
-    checkin = models.DateTimeField( default=timezone.now())
+    checkin = models.DateTimeField(default=timezone.now())
     checkout = models.DateTimeField(null=True, blank=True)
     email = models.EmailField(blank=False)
     placa = models.CharField(max_length=7, blank=False)
@@ -80,8 +90,9 @@ class MovRotativo(models.Model):
     valor_hora = models.DecimalField(
         max_digits=5, decimal_places=2, null=False, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
-    chk = models.CharField(("Situação"),max_length=15, choices=SAIDA_CHOICES, default='Não')
-    
+    chk = models.CharField(("Situação"), max_length=15,
+                           choices=SAIDA_CHOICES, default='Não')
+
     def horas_total(self):
         if self.checkout is None:
             return self.checkout == 0
@@ -96,12 +107,11 @@ class MovRotativo(models.Model):
             self.checkout = timezone.now()
         return super(MovRotativo, self).save(*args, **kwargs)
 
-   
-    
     def send_email(self):
         if self.pago == 'Sim':
             assunto = 'Comprovante pagamento Estacione Aqui 24 Horas'
-            mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Seu horário de Chekin foi:  ' + str(self.checkin) + 'Seu horário de Chekou foi:   ' + str(self.checkout) + '  Confirmamos o pagamento do valor de: ' + str(self.total) + '   E aguardamos seu retorno '
+            mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Seu horário de Chekin foi:  ' + str(self.checkin) + 'Seu horário de Chekou foi:   ' + str(
+                self.checkout) + '  Confirmamos o pagamento do valor de: ' + str(self.total_mes_pagar()) + '   E aguardamos seu retorno '
             recipient_list = [self.email]
 
             send_mail(
@@ -117,19 +127,14 @@ class Mensalista(models.Model):
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE, blank=False)
     inicio = models.DateField(("Início"), default=datetime.date.today)
     validade = models.DateField(("Validade"), blank=False, )
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE, blank=False)
     valor_mes = models.DecimalField(
         max_digits=6, decimal_places=2, blank=False)
-    email = models.ForeignKey(Pessoa, on_delete=models.CASCADE, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
-
-    @property
-    def proprietario(self):
-        return self.veiculo.proprietario
+   
 
     @property
     def email(self):
-        return self.pessoa.email
+        return self.veiculo.proprietario.email
 
     def mensal(self):
         return math.ceil((self.validade - self.inicio).total_seconds() / 86400)
@@ -144,18 +149,19 @@ class Mensalista(models.Model):
         return str(self.veiculo) + ' - ' + str(self.inicio)
 
     def send_email(self):
-            if self.pago == 'Sim':
-                assunto =  'Comprovante pagamento Estacione Aqui 24 Horas'
-                mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Ativação do estacionamento dia :  ' + str(self.inicio) + 'Com validade até o dia   ' + str(self.validade) + '  Confirmamos o pagamento do valor de: ' + str(self.total_mes_pagar) + '   E aguardamos seu retorno '
-                recipient_list = [self.email]
+        if self.pago == 'Sim':
+            assunto = 'Comprovante pagamento Estacione Aqui 24 Horas'
+            mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Ativação do estacionamento dia :  ' + str(self.inicio) + 'Com validade até o dia   ' + str(
+                self.validade) + '  Confirmamos o pagamento do valor de: ' + str(self.total_mes_pagar) + '   E aguardamos seu retorno '
+            recipient_list = [self.email]
 
-                send_mail(
-                    assunto,
-                    mensagem,
-                    'estacioneaqui24@gmail.com',
-                    [recipient_list],
-                    fail_silently=False,
-                )
+            send_mail(
+                assunto,
+                mensagem,
+                'estacioneaqui24@gmail.com',
+                [recipient_list],
+                fail_silently=False,
+            )
 
 
 class MovMensalista(models.Model):

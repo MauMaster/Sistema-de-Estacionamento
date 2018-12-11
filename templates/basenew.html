@@ -20,13 +20,17 @@
        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
       <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-sortable.css' %}">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
 
       <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
 
-      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+   
+
+      <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+
+      
 
     <!-- Estilos customizados para esse template -->
   
@@ -40,108 +44,79 @@
 <body>
     <!-- cintauner-fluid é responsivo completando a tela
     já só o container é é responsivo usando mais o centro da tela -->
-    <div class="container-fluid">
-{% block menu %}
-       <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <img class="navbar-brand" src="{% static 'img/logo_index.jpg' %}">
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      
-    </nav>
 
-    <div class="container-fluid">
-      <div class="row">
+{% block menu %}
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <img class="navbar-brand" src="{% static 'img/logo_index.jpg' %}">
+    <div class="navbar-dark"></div>
+
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-              <br>
-                <a class="nav-link active" href="{% url 'core_home' %}">
-                  <span data-feather="home"></span>
-                  Home <span class="sr-only">(atual)</span>
-                </a>
-              </li>
-               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <br>
+                        <br>
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Cadastros</span>
                </h6>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'core_lista_pessoas' %}">
-                  <span data-feather="users"></span>
-                  Pessoas
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'core_lista_veiculos' %}">
-                  <span data-feather="truck"></span>
-                  Veículos
-                </a>
-              </li>
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core_lista_pessoas' %}">
+                                <span data-feather="users"></span> Pessoas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core_lista_veiculos' %}">
+                                <span data-feather="truck"></span> Veículos
+                            </a>
+                        </li>
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Estacionamento</span>
                </h6>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'core_lista_movrotativos' %}">
-                  <span data-feather="users"></span>
-                  Rotativo
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'core_lista_mensalista' %}">
-                  <span data-feather="rotate-cw"></span>
-                  Mensalistas
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="calendar"></span>
-                  Integrações
-                </a>
-              </li>
-            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core_lista_movrotativos' %}">
+                                <span data-feather="users"></span> Rotativo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core_lista_mensalista' %}">
+                                <span data-feather="rotate-cw"></span> Mensalistas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://127.0.0.1:8000/">
+                                <span data-feather="calendar"></span> Site
+                            </a>
+                        </li>
+                </ul>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Relatórios salvos</span>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Dados do Sistema</span>
               </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Neste mês
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Último trimestre
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Engajamento social
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Vendas do final de ano
-                </a>
-              </li>
-                {% if user.is_authenticated %}
-            <li class="nav-item disabled">
-                <a class="nav-link" href="">Olá, {{user}}</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'logout' %}">SAIR</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            {% endif %}
-            </ul>
-          </div>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core_home' %}">
+                            <span data-feather="activity"></span> Gráfico
+                        </a>
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item disabled">
+                            <a class="nav-link" href="">Olá, {{user}}</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'logout' %}">SAIR</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        {% endif %}
+                </ul>
+            </div>
         </nav>
-      
 {% endblock %}
   
 {% block main %}
@@ -161,8 +136,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
-        
-         <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+          
    
     <script>
       feather.replace()

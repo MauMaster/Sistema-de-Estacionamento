@@ -86,7 +86,7 @@ class ChartData(APIView):
         }
         return Response(data)
 
-    
+
 @login_required
 def dashboard(request):
     mov_rot = MovRotativo.objects.all()
@@ -177,7 +177,7 @@ def veiculo_update(request, id):
             form.save()
             messages.success(request, "Veículo alterado com sucesso")
             return redirect('core_lista_veiculos')
-            
+
     else:
         return render(request, 'core/update_veiculo.html', data)
 
@@ -219,7 +219,8 @@ def movrotativos_novo(request):
         form = MovRotativoForm(request.POST or None)
         if form.is_valid():
             form.save()
-            messages.success(request, "Movimento Rotativo adicionado com sucesso")
+            messages.success(
+                request, "Movimento Rotativo adicionado com sucesso")
             return redirect('core_lista_movrotativos')
     else:
         form = MensalistaForm

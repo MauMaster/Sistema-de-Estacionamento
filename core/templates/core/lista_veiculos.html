@@ -1,94 +1,70 @@
 {%extends 'basenew.html' %}
 {% load widget_tweaks %}
 {% load bootstrap %}
-
 {% block main %}
 <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <div class="col-sm-12">
         <h2>Cadastro De Veículos</h2>
         <form action="{%  url 'core_veiculo_novo'  %}" method="POST" novalidate>
-        <div class="form-row">
-{% csrf_token %}
+            <div class="form-row">
+                {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field }} {% endfor %} {% for field in form.visible_fields %}
+                <div class="form-group col-md-3">
+                    {{ field.label_tag }} {% if form.is_bound %} {% if field.errors %} {% render_field field class="form-control is-invalid" %} {% for error in field.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                    {% endfor %} {% else %} {% render_field field class="form-control is-valid" %} {% endif %} {% else %} {% render_field field class="form-control" %} {% endif %} {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small> {% endif %}
 
-  {% for hidden_field in form.hidden_fields %}
-    {{ hidden_field }}
-  {% endfor %}
+                </div>
+                {% endfor %}
 
-
-  {% for field in form.visible_fields %}
-    <div class="form-group col-md-3">
-      {{ field.label_tag }}
-
-      {% if form.is_bound %}
-        {% if field.errors %}
-          {% render_field field class="form-control is-invalid" %}
-          {% for error in field.errors %}
-            <div class="invalid-feedback">
-              {{ error }}
-            </div>
-          {% endfor %}
-        {% else %}
-          {% render_field field class="form-control is-valid" %}
-        {% endif %}
-      {% else %}
-        {% render_field field class="form-control" %}
-      {% endif %}
-
-      {% if field.help_text %}
-        <small class="form-text text-muted">{{ field.help_text }}</small>
-      {% endif %}
-    
-    </div>
-  {% endfor %}
-
-<br>
-<br>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
 
         </form>
-      
-    </div>
-    <div class="col-sm-12">
-        <h2>Lista Veículos</h2>
-         {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-            
-        <table class="table table-bordered sortable">
-            <thead class="p-3 mb-2 bg-primary text-white">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Placa</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for veiculo in veiculos %}
-                <tr>
-                    <th scope="row">{{veiculo.id}}</th>
-                    <td> <a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.marca}}
-                        </a></td>
-                    <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.modelo}}</a></td>
-                    <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.placa}}</a></td>
-                </tr>
+
+        <div class="col-sm-12">
+            <h2>Lista Veículos</h2> {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                 {% endfor %}
-            </tbody>
+            </ul>
+            {% endif %}
 
+            <table class="table table-bordered sortable">
+                <thead class="p-3 mb-2 bg-primary text-white">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Placa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for veiculo in veiculos %}
+                    <tr>
+                        <th scope="row">{{veiculo.id}}</th>
+                        <td> <a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.marca}}
+                        </a></td>
+                        <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.modelo}}</a></td>
+                        <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.placa}}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
 
-        </table>
+            </table>
 
-    </div>
-</div>
-  <br>
-    {% include 'core/footer.html' %}
+        </div>
+
+        <br> {% include 'core/footer.html' %}
 </main>
 
 {% endblock %}

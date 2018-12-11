@@ -2,21 +2,19 @@
 {% block main %}
 
 <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-50">
-<br>
-<br>
-<br>
-<br>
-<div class="row">
-    <div class="col">
-        <h2>Tem certeza que deseja deletar: {{ obj }}</h2>
-        <form method="POST">
-                
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Deletar</button>
-
-        </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col">
+            <h2>Tem certeza que deseja deletar: {{ obj }}</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Deletar</button>
+            </form>
+        </div>
     </div>
-</div>
 </main>
  {% include 'core/footer.html' %}
 {% endblock %}

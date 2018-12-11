@@ -1,33 +1,27 @@
 {%extends 'basenew.html' %}
-
 {% load bootstrap %}
-
-
-
 {% block main %}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <br>
 <br>
 <br>
 <div class="row">
-
     <div class="col">
-    <br>
-<br>
-<br>
+        <br>
+        <br>
+        <br>
         <h1>Seja bem vindo ao sistema</h1>
-        <div class='col-sm-12'>
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <h2>Dados do sistema</h2>
+        <div class='col-sm-10'>
+            <canvas id="myChart" width="400" height="400"></canvas>
         </div>
         <br>
         <br>
-<br>
-<br>
-<br>
-         {% include 'core/footer.html' %}
+        <br>
+        <br>
+        <br>
+{% include 'core/footer.html' %}
 <script>
-
 var endpoint  ='/sistema/api/chart/data/'
 var defaultData = []
 var  labels = [];
@@ -38,7 +32,7 @@ $.ajax({
         labels = data.labels
         defaultData = data.default
         setChart()
-                
+        
                
 },
     error: function(error_data){
@@ -46,10 +40,8 @@ $.ajax({
         console.log(error_data)
     }
 })
-
 function setChart(){
 var ctx = document.getElementById("myChart").getContext('2d');
-
 var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -89,9 +81,6 @@ var myChart = new Chart(ctx, {
 }
 
 </script>
-    </div>
-</div>
- {% include 'core/footer.html' %}
 {% endblock %}
  
   

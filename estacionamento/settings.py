@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'bootstrap_datepicker',
     'googlemaps',   
-    'rest_framework'
+    'rest_framework',
+    'input_mask',
   
     
     

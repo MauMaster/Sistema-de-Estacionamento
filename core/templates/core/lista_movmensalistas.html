@@ -3,8 +3,12 @@
 {% block main %}
 
 <div class="row">
+    <br>
+    <br>
+    <br>
     <div class="col-sm-6">
-            <h1>Cadastro</h2>
+
+        <h1>Cadastro</h2>
         <form action="{%  url 'core_movmensalista_novo'  %}" method="POST" novalidate>
 
             {% csrf_token %}
@@ -47,9 +51,7 @@
                         {% endfor %}
                     </tbody>
                   </table>
-                                 
-            </table>
-        
+
     </div>
  {% include 'core/footer.html' %}
 {% endblock %}
