@@ -55,14 +55,18 @@
                         </tbody>
 
                     </table>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="{% url 'core_lista_mensalista'%}" class="btn btn-info">Voltar</a>
-                    <a href="{% url 'core_mensalista_delete' mensalista.id %}" class="btn btn-danger">Delete</a>
-                    <br>
-                    <br>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <a href="{% url 'core_lista_mensalista'%}" class="btn btn-info">Voltar</a>
+                            <a href="{% url 'core_mensalista_delete' mensalista.id %}" class="btn btn-danger">Delete</a>
+                            <br>
+                            <br>
 
             </form>
-
-</main>
+            </div>
  {% include 'core/footer.html' %}
+</main>
+
 {% endblock %}

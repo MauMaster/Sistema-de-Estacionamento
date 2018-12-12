@@ -34,6 +34,10 @@ User = get_user_model()
 def dashboard(request):
     return render(request, 'core/dashboard.html')
 
+@login_required
+def index(request):
+    return render(request, 'core/index.html')
+
 
 @receiver(post_save, sender=MovRotativo)
 def before_movrotativo_save(sender, **kwargs):

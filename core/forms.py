@@ -15,15 +15,40 @@ class PessoaForm(forms.ModelForm):
             widget=forms.TextInput(
                                     attrs={
                                             'placeholder': 'Nome Completo'}))
+
+    email = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={
+                                            'placeholder': 'seuemail@seuservidor.com.br'}))
+
+    endereco = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={
+                                            'placeholder': 'Rua ou Avenida'}))
+
+    numero = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={
+                                            'placeholder': 'número'}))
+
+    bairro = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={
+                                            'placeholder': 'seu bairro'}))
+
+    cidade = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={
+                                            'placeholder': 'sua cidade'}))
     cpf = forms.CharField(
             widget=forms.TextInput(
                                     attrs={
-                                            'placeholder': 'apenas números'}))
+                                            'placeholder': '0000000000'}))
 
     telefone = forms.CharField(
             widget=forms.TextInput(
                                     attrs={
-                                            'placeholder': 'apenas números'}))
+                                            'placeholder': '00 00000000'}))
 
     class Meta:
         model = Pessoa
@@ -42,7 +67,17 @@ class VeiculoForm(forms.ModelForm):
     placa = forms.CharField(
             widget=forms.TextInput(
                                     attrs={
-                                            'placeholder': 'Exemplo AAA-9999'}))
+                                            'placeholder': 'AAA-9999'}))
+
+    modelo = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={
+                                            'placeholder': 'Modelo do carro'}))
+
+    cor = forms.CharField(
+        widget=forms.TextInput(
+                                attrs={
+                                        'placeholder': 'Cor do carro'}))
  
     class Meta:
         model = Veiculo
@@ -59,11 +94,22 @@ class VeiculoForm(forms.ModelForm):
 class MovRotativoForm(forms.ModelForm):
     placa = forms.CharField(
             widget=forms.TextInput(
-                                    attrs={'class': 'myDateClass', 'placeholder': 'Exemplo AAA-9999'}))
+                                    attrs={'placeholder': 'AAA-9999'}))
+
+   
+
+    email = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={ 'placeholder': 'seuemail@seuservidor.com.br'}))
+
+    modelo = forms.CharField(
+            widget=forms.TextInput(
+                                    attrs={ 'placeholder': 'Modelo do carro'}))
+
     valor_hora = forms.CharField(
-        widget=forms.TextInput(
-                                attrs={
-                                        'placeholder': 'x,xx'}))
+            widget=forms.NumberInput(
+                                    attrs={ 'placeholder': '0,00'}))
+ 
   
     class Meta:
         model = MovRotativo
@@ -83,9 +129,9 @@ class MensalistaForm(forms.ModelForm):
                                attrs={
                                       'placeholder': 'xx/xx/xxxx'}))
     valor_mes = forms.DecimalField(
-        widget=forms.TextInput(
+        widget=forms.NumberInput(
                                 attrs={
-                                        'placeholder': '0,00'}))
+                                        'placeholder': '000,00'}))
 
     class Meta:
         model = Mensalista

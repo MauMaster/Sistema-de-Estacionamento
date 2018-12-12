@@ -31,7 +31,7 @@ SAIDA_CHOICES = (
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=50, blank=False)
-    email = models.EmailField(blank=False)
+    email = models.EmailField(unique=True,blank=False)
     cpf = models.CharField(unique=True, max_length=11, validators=[
             RegexValidator(
                 r'[0-9]',
@@ -47,7 +47,7 @@ class Pessoa(models.Model):
     bairro = models.CharField(max_length=30)
     telefone = models.CharField(max_length=20, blank=False)
     cidade = models.CharField(max_length=20)
-    estado = models.CharField(max_length=2, choices=STATE_CHOICES)
+    estado = models.CharField(default='RS', max_length=2, choices=STATE_CHOICES)
 
     def __str__(self):
         return str(self.nome) + ' - ' + str(self.email)
@@ -64,7 +64,7 @@ class Veiculo(models.Model):
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE, blank=False)
     modelo = models.CharField(max_length=20, blank=False)
     ano = models.CharField(max_length=7, default="2018")
-    placa = models.CharField(max_length=7)
+    placa = models.CharField(max_length=8)
     proprietario = models.ForeignKey(
         Pessoa, on_delete=models.CASCADE, blank=False, )
     cor = models.CharField(max_length=15, blank=False)
@@ -85,13 +85,15 @@ class MovRotativo(models.Model):
     checkin = models.DateTimeField(default=timezone.now())
     checkout = models.DateTimeField(null=True, blank=True)
     email = models.EmailField(blank=False)
-    placa = models.CharField(max_length=7, blank=False)
+    placa = models.CharField(max_length=8, blank=False)
     modelo = models.CharField(max_length=15, blank=False)
     valor_hora = models.DecimalField(
         max_digits=5, decimal_places=2, null=False, blank=False)
     pago = models.CharField(max_length=15, choices=PAGO_CHOICES)
     chk = models.CharField(("Situação"), max_length=15,
                            choices=SAIDA_CHOICES, default='Não')
+
+                           
 
     def horas_total(self):
         if self.checkout is None:
@@ -111,7 +113,7 @@ class MovRotativo(models.Model):
         if self.pago == 'Sim':
             assunto = 'Comprovante pagamento Estacione Aqui 24 Horas'
             mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Seu horário de Chekin foi:  ' + str(self.checkin) + 'Seu horário de Chekou foi:   ' + str(
-                self.checkout) + '  Confirmamos o pagamento do valor de: ' + str(self.total_mes_pagar()) + '   E aguardamos seu retorno '
+                self.checkout) + '  Confirmamos o pagamento do valor de: R$' + str(self.total()) + '   E aguardamos seu retorno '
             recipient_list = [self.email]
 
             send_mail(
@@ -152,7 +154,7 @@ class Mensalista(models.Model):
         if self.pago == 'Sim':
             assunto = 'Comprovante pagamento Estacione Aqui 24 Horas'
             mensagem = 'Obrigado por utilizar o Estacione Aqui 24 horas. Ativação do estacionamento dia :  ' + str(self.inicio) + 'Com validade até o dia   ' + str(
-                self.validade) + '  Confirmamos o pagamento do valor de: ' + str(self.total_mes_pagar) + '   E aguardamos seu retorno '
+                self.validade) + '  Confirmamos o pagamento do valor de: R$ ' + str(self.total_mes_pagar()) + '   E aguardamos seu retorno '
             recipient_list = [self.email]
 
             send_mail(

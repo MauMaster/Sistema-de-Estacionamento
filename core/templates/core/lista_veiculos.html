@@ -46,6 +46,7 @@
                         <th scope="col">Marca</th>
                         <th scope="col">Modelo</th>
                         <th scope="col">Placa</th>
+                        <th scope="col">Proprietário</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,6 +57,7 @@
                         </a></td>
                         <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.modelo}}</a></td>
                         <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.placa}}</a></td>
+                        <td><a href="{%  url 'core_veiculo_update' veiculo.id  %}" style="color:black">{{veiculo.proprietario}}</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
